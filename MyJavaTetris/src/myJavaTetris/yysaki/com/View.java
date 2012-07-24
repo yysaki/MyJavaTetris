@@ -49,10 +49,10 @@ public class View extends JFrame {
 				status[i][j] = 0;
 			}
 		}
-		for(int i=0;i<width+1;i++){
+		for(int i=0;i<status.length;i++){
 			status[i][height] = 7;
 		}
-		for(int j=0;j<height+1;j++){
+		for(int j=0;j<status[0].length;j++){
 			status[width][j] = 7;
 		}
 
@@ -99,7 +99,7 @@ public class View extends JFrame {
 
 		System.out.println("next");
 		// pile
-		for(int i=0;i<4;i++){
+		for(int i=0;i<blocks.getPoint().length;i++){
 			final Point p = blocks.getPoint()[i];
 			final int x = blocks.getDir().getX() + p.getX() * (int)Math.cos((blocks.getRotate())*Math.PI/2) + p.getY() * (int)Math.sin((blocks.getRotate())*Math.PI/2);
 			final int y = blocks.getDir().getY() + -1 * p.getX() * (int)Math.sin((blocks.getRotate())*Math.PI/2) + p.getY() * (int)Math.cos((blocks.getRotate())*Math.PI/2);
@@ -136,7 +136,7 @@ public class View extends JFrame {
 
 		// check hasNext
 		Boolean hasNext = true;
-		for(int i=0;i<4;i++){
+		for(int i=0;i<blocks.getPoint().length;i++){
 			final Point p = blocks.getPoint()[i];
 			final int x = blocks.getDir().getX() + p.getX() * (int)Math.cos((blocks.getRotate())*Math.PI/2) + p.getY() * (int)Math.sin((blocks.getRotate())*Math.PI/2);
 			final int y = blocks.getDir().getY() + -1 * p.getX() * (int)Math.sin((blocks.getRotate())*Math.PI/2) + p.getY() * (int)Math.cos((blocks.getRotate())*Math.PI/2);

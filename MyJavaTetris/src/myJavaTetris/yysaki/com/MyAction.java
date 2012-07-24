@@ -72,7 +72,7 @@ class MyAction extends AbstractAction {
 	private Boolean isMovable(){
 		final Blocks b = v.getBlocks();
 		final int[][] s = v.getStatus();
-		for(int i=0;i<4;i++){ // p.size()
+		for(int i=0;i<b.getPoint().length;i++){ // p.size()
 			final Point p = b.getPoint()[i];
 			final int nextRotate = (b.getRotate() + rotate) % b.getRotatable();
 			final int nextX = b.getDir().getX() + dir.getX() +      p.getX() * (int)Math.cos((nextRotate)*Math.PI/2) + p.getY() * (int)Math.sin((nextRotate)*Math.PI/2);
