@@ -59,8 +59,8 @@ public class GamePanel extends JPanel{
 
 	private void drawBlocks(Graphics g){
 		Blocks b = v.getBlocks();
-		for(int i=0;i<b.getPoint().length;i++){
-			final Point p = b.getPoint()[i];
+		for(int i=0;i<b.getPoints().length;i++){
+			final Point p = b.getPoints()[i];
 			final int dx = b.getDir().getX() + p.getX() * (int)Math.cos(b.getRotate()*Math.PI/2) + p.getY() * (int)Math.sin(b.getRotate()*Math.PI/2);
 			final int dy = b.getDir().getY() + -1 * p.getX() * (int)Math.sin(b.getRotate()*Math.PI/2) + p.getY() * (int)Math.cos(b.getRotate()*Math.PI/2);
 
