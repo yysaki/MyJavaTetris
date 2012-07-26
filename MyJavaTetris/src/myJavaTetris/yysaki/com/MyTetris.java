@@ -9,7 +9,7 @@ import myJavaTetris.yysaki.com.View;
  */
 public class MyTetris {
 	public static void main(String[] args) {
-		new View();
+		new View(9,15);
 	}
 
 }

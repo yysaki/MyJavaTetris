@@ -28,11 +28,11 @@ class MyAction extends AbstractAction {
 	 * イベント識別子
 	 * "tick", "UP", "DOWN", "RIGHT", "LEFT"
 	 */
-	private final String key;
+	private final String KEY;
 
 	public MyAction(String key, View v){
 		this.v = v;
-		this.key = key;
+		this.KEY = key;
 		if(key=="UP"){
 			dir = new Point(0,0);
 			rotate = 1;
@@ -52,14 +52,14 @@ class MyAction extends AbstractAction {
 	 * キー入力、タイマーによりアクティブブロックを操作する
 	 */
 	public void actionPerformed(ActionEvent e){
-		System.out.println(key);
+		System.out.println(KEY);
 
 		if(isMovable()){
 			final Blocks b = v.getBlocks();
 			b.setDir(new Point(b.getDir().getX()+dir.getX(), b.getDir().getY()+dir.getY()));
 			b.setRotate((b.getRotate() + rotate) % b.getRotatable());
 			v.repaint();
-		}else if(key=="DOWN" || key=="tick"){
+		}else if(KEY=="DOWN" || KEY=="tick"){
 			v.next();
 		}
 	}
@@ -70,20 +70,15 @@ class MyAction extends AbstractAction {
 	 * @return
 	 */
 	private Boolean isMovable(){
-		final Blocks b = v.getBlocks();
-		final int[][] s = v.getStatus();
-		for(int i=0;i<b.getPoint().length;i++){ // p.size()
-			final Point p = b.getPoint()[i];
-			final int nextRotate = (b.getRotate() + rotate) % b.getRotatable();
-			final int nextX = b.getDir().getX() + dir.getX() +      p.getX() * (int)Math.cos((nextRotate)*Math.PI/2) + p.getY() * (int)Math.sin((nextRotate)*Math.PI/2);
-			final int nextY = b.getDir().getY() + dir.getY() + -1 * p.getX() * (int)Math.sin((nextRotate)*Math.PI/2) + p.getY() * (int)Math.cos((nextRotate)*Math.PI/2);
+		Blocks next = new Blocks(v.getBlocks());
+		next.setDir(new Point(next.getDir().getX() + dir.getX(), next.getDir().getY() + dir.getY()));
+		next.setRotate(next.getRotate() + rotate);
+		
+		if(v.getField().canBeSetBlocks(next)){
+			return true;
+		}else{
+			return false;
+		}
 
-			if(nextX<0 || s.length-1<nextX || nextY<0 || s[0].length-1<nextY){
-				return false;
-			}else if(s[nextX][nextY]!=0){
-				return false;
-			}
-		}			
-		return true;
 	}
 }

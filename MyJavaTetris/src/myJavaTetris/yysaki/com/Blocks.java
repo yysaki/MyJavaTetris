@@ -25,7 +25,15 @@ public class Blocks {
 	public Blocks(Point dir, int rotate){
 		this(dir, rotate, (new Random().nextInt(7))+1);
 	}
-
+	
+	/**
+	 * コピーコンストラクタ
+	 * @param b
+	 */
+	public Blocks(Blocks b){
+		this(b.getDir(), b.getRotate(), b.getColor());
+	}
+	
 	/**
 	 * 1<=id<=8
 	 * @param dir

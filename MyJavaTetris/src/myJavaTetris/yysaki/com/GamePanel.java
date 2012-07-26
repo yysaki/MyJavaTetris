@@ -14,7 +14,7 @@ import myJavaTetris.yysaki.com.View;
 @SuppressWarnings("serial")
 public class GamePanel extends JPanel{
 	private View v;
-	private final int blockSize = 25; // 正方形ブロックの辺の長さ
+	private final static int BLOCKSIZE = 25; // 正方形ブロックの辺の長さ
 	private Image[] icon; // gray, red, yellow, purple, green, blue, orange, water
 
 	public GamePanel(View v) {
@@ -24,7 +24,7 @@ public class GamePanel extends JPanel{
 		this.v = v;
 		
 		/* panel size */
-		setPreferredSize(new Dimension(v.getWidth()*blockSize, v.getHeight()*blockSize));
+		setPreferredSize(new Dimension(v.getField().getWidth()*BLOCKSIZE, v.getField().getHeight()*BLOCKSIZE));
 
 		/* set image */
 		icon = new Image[8];
@@ -50,9 +50,9 @@ public class GamePanel extends JPanel{
 	 * @param g
 	 */
 	private void drawBG(Graphics g){
-		for(int i=0;i<v.getWidth();i++){
-			for(int j=0;j<v.getHeight();j++){
-				this.drawBlock(g, v.getStatus()[i][j], i, j);
+		for(int i=0;i<v.getField().getWidth();i++){
+			for(int j=0;j<v.getField().getHeight();j++){
+				this.drawBlock(g, v.getField().getStatus(i, j), i, j);
 			}
 		}
 	}
@@ -72,6 +72,6 @@ public class GamePanel extends JPanel{
 	private void drawBlock(Graphics g, int color, int x, int y){
 		//			System.out.println("drawBlock color:" + color + ", x:" + x + ", y:" + y);
 		//		System.out.println("drawBlock color:" + color);
-		g.drawImage(icon[color], x*blockSize, y*blockSize, this);		
+		g.drawImage(icon[color], x*BLOCKSIZE, y*BLOCKSIZE, this);		
 	}
 }
