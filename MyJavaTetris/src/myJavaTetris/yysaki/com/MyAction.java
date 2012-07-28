@@ -6,7 +6,7 @@ import javax.swing.AbstractAction;
 import myJavaTetris.yysaki.com.View;
 
 /**
- * ƒL[“ü—ÍAƒ^ƒCƒ}[‚É‚æ‚éƒCƒxƒ“ƒg‘€ì‚ÌŠÇ—
+ * ã‚­ãƒ¼å…¥åŠ›ã€ã‚¿ã‚¤ãƒãƒ¼ã«ã‚ˆã‚‹ã‚¤ãƒ™ãƒ³ãƒˆæ“ä½œã®ç®¡ç†
  * @author yysaki
  *
  */
@@ -15,17 +15,17 @@ class MyAction extends AbstractAction {
 	private View v;
 
 	/**
-	 * ƒAƒNƒVƒ‡ƒ“‚ÌˆÚ“®•ûŒü
+	 * ã‚¢ã‚¯ã‚·ãƒ§ãƒ³æ™‚ã®ç§»å‹•æ–¹å‘
 	 */
 	private final Point dir;
 
 	/**
-	 * ƒAƒNƒVƒ‡ƒ“‚Ì‰ñ“]•ûŒü(0‚Ì‰ñ“]‚µ‚È‚¢)
+	 * ã‚¢ã‚¯ã‚·ãƒ§ãƒ³æ™‚ã®å›è»¢æ–¹å‘(0ã®æ™‚å›è»¢ã—ãªã„)
 	 */
 	private final int rotate;
 
 	/**
-	 * ƒCƒxƒ“ƒg¯•Êq
+	 * ã‚¤ãƒ™ãƒ³ãƒˆè­˜åˆ¥å­
 	 * "tick", "UP", "DOWN", "RIGHT", "LEFT"
 	 */
 	private final String KEY;
@@ -49,7 +49,7 @@ class MyAction extends AbstractAction {
 	}
 
 	/**
-	 * ƒL[“ü—ÍAƒ^ƒCƒ}[‚É‚æ‚èƒAƒNƒeƒBƒuƒuƒƒbƒN‚ğ‘€ì‚·‚é
+	 * ã‚­ãƒ¼å…¥åŠ›ã€ã‚¿ã‚¤ãƒãƒ¼ã«ã‚ˆã‚Šã‚¢ã‚¯ãƒ†ã‚£ãƒ–ãƒ–ãƒ­ãƒƒã‚¯ã‚’æ“ä½œã™ã‚‹
 	 */
 	public void actionPerformed(ActionEvent e){
 		System.out.println(KEY);
@@ -65,7 +65,7 @@ class MyAction extends AbstractAction {
 	}
 
 	/**
-	 * ƒL[“ü—Í•ûŒü‚ÉƒuƒƒbƒN‚ªˆÚ“®‰Â”\‚©‚Ç‚¤‚©’²‚×‚é
+	 * ã‚­ãƒ¼å…¥åŠ›æ–¹å‘ã«ãƒ–ãƒ­ãƒƒã‚¯ãŒç§»å‹•å¯èƒ½ã‹ã©ã†ã‹èª¿ã¹ã‚‹
 	 * 
 	 * @return
 	 */
