@@ -3,7 +3,7 @@ package myJavaTetris.yysaki.com;
 import myJavaTetris.yysaki.com.View;
 
 /**
- * main繝｡繧ｽ繝�繝牙他蜃ｺ縺励け繝ｩ繧ｹ
+ * mainメソッド呼出しクラス
  * @author sasaki
  * 
  */

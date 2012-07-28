@@ -3,7 +3,7 @@ package myJavaTetris.yysaki.com;
 import myJavaTetris.yysaki.com.Blocks;
 
 /**
- * ãƒ–ãƒ­ãƒƒã‚¯ã®å †ç©çŠ¶æ³ã‚’è¡¨ã™ã‚¯ãƒ©ã‚¹
+ * ƒuƒƒbƒN‚Ì‘ÍÏó‹µ‚ğ•\‚·ƒNƒ‰ƒX
  * @author yysaki
  *
  */
@@ -44,11 +44,11 @@ public class Field {
 	}
 	
 	/**
- 	 * statusesã«blocksã‚’æç”»ã™ã‚‹
-	 * ç©ºã§ç„¡ã„åœ°ç‚¹ã«ç©ã‚‚ã†ã¨ã—ãŸæ™‚falseã‚’è¿”ã™
+ 	 * statuses‚Éblocks‚ğ•`‰æ‚·‚é
+	 * ‹ó‚Å–³‚¢’n“_‚ÉÏ‚à‚¤‚Æ‚µ‚½false‚ğ•Ô‚·
 
 	 * @param b
-	 * @return ãƒ•ã‚£ãƒ¼ãƒ«ãƒ‰ä¸Šã®ãƒ–ãƒ­ãƒƒã‚¯ã‚’å¡—ã‚Šæ›¿ãˆã‚‹ã“ã¨ç„¡ãé…ç½®å‡ºæ¥ãŸã‹
+	 * @return ƒtƒB[ƒ‹ƒhã‚ÌƒuƒƒbƒN‚ğ“h‚è‘Ö‚¦‚é‚±‚Æ–³‚­”z’uo—ˆ‚½‚©
 	 */
 	public Boolean pileBlocks(Blocks b){
 		Boolean ret = true;
@@ -84,9 +84,9 @@ public class Field {
 	}
 
 	/**
-	 * fieldã«æ¶ˆå»å‡ºæ¥ã‚‹lineãŒã‚ã‚‹ã‹èª¿ã¹ã‚‹
+	 * field‚ÉÁ‹o—ˆ‚éline‚ª‚ ‚é‚©’²‚×‚é
 	 * 
-	 * @return lineãŒå­˜åœ¨ã™ã‚‹å ´åˆã¯ãã®è¡Œæ•°ã€å­˜åœ¨ã—ãªã„å ´åˆã¯ -1
+	 * @return line‚ª‘¶İ‚·‚éê‡‚Í‚»‚Ìs”A‘¶İ‚µ‚È‚¢ê‡‚Í -1
 	 */
 	private int hasDeletable(){
 		// check isDeletable
@@ -107,9 +107,9 @@ public class Field {
 	}
 	
 	/**
-	 * ãƒ•ã‚£ãƒ¼ãƒ«ãƒ‰ã«æŒ‡å®šã•ã‚ŒãŸãƒ–ãƒ­ãƒƒã‚¯ã‚’é…ç½®å‡ºæ¥ã‚‹ã‹èª¿ã¹ã‚‹
+	 * ƒtƒB[ƒ‹ƒh‚Éw’è‚³‚ê‚½ƒuƒƒbƒN‚ğ”z’uo—ˆ‚é‚©’²‚×‚é
 	 * @param b
-	 * @return ãƒ•ã‚£ãƒ¼ãƒ«ãƒ‰ã«é…ç½®å‡ºæ¥ã‚‹ã‹
+	 * @return ƒtƒB[ƒ‹ƒh‚É”z’uo—ˆ‚é‚©
 	 */
 	public Boolean canBeSetBlocks(Blocks b){
 		for(int i=0;i<b.getPoints().length;i++){

@@ -11,13 +11,13 @@ import myJavaTetris.yysaki.com.Point;
 import myJavaTetris.yysaki.com.Field;
 
 /**
- * ã‚²ãƒ¼ãƒ ã‚¦ã‚¤ãƒ³ãƒ‰ã‚¦ã®ç®¡ç†
+ * ƒQ[ƒ€ƒEƒCƒ“ƒhƒE‚ÌŠÇ—
  * @author yysaki
  *
  */
 @SuppressWarnings("serial")
 public class View extends JFrame {
-	private final Point start; // ã‚¢ã‚¯ãƒ†ã‚£ãƒ–ãƒ–ãƒ­ãƒƒã‚¯ã®ã‚¹ã‚¿ãƒ¼ãƒˆåœ°ç‚¹
+	private final Point start; // ƒAƒNƒeƒBƒuƒuƒƒbƒN‚ÌƒXƒ^[ƒg’n“_
 
 	private GamePanel panel; 
 	private Blocks blocks;
@@ -70,7 +70,7 @@ public class View extends JFrame {
 }
 
 	/**
-	 * åœ°é¢ã«è¨­ç½®ã—ãŸæ™‚ã€æ–°ã—ã„ãƒ†ãƒˆãƒªã‚¹ãƒ–ãƒ­ãƒƒã‚¯ã‚’å‡ºç¾ã•ã›ã‚‹
+	 * ’n–Ê‚Éİ’u‚µ‚½AV‚µ‚¢ƒeƒgƒŠƒXƒuƒƒbƒN‚ğoŒ»‚³‚¹‚é
 	 */
 	public void next(){
 		// check isGameOver
@@ -98,7 +98,7 @@ public class View extends JFrame {
 			isGameOver = true;
 			field.setAll(1);
 
-			blocks = new Blocks(start,0,1); // ãƒãƒƒãƒ‰ãƒã‚¦ãƒã‚¦ ã‚¢ã‚¯ãƒ†ã‚£ãƒ–ãƒ–ãƒ­ãƒƒã‚¯ã‚’GameOverè‰²èƒŒæ™¯ã«åŸ‹ã‚ã‚‹
+			blocks = new Blocks(start,0,1); // ƒoƒbƒhƒmƒEƒnƒE ƒAƒNƒeƒBƒuƒuƒƒbƒN‚ğGameOverF”wŒi‚É–„‚ß‚é
 			repaint();
 
 		}

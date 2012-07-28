@@ -7,14 +7,14 @@ import javax.swing.*;
 import myJavaTetris.yysaki.com.View;
 
 /**
- * ãƒ†ãƒˆãƒªã‚¹ç”»é¢(JPanel)ã®ç®¡ç†
+ * ƒeƒgƒŠƒX‰æ–Ê(JPanel)‚ÌŠÇ—
  * @author yysaki
  *
  */
 @SuppressWarnings("serial")
 public class GamePanel extends JPanel{
 	private View v;
-	private final static int BLOCKSIZE = 25; // æ­£æ–¹å½¢ãƒ–ãƒ­ãƒƒã‚¯ã®è¾ºã®é•·ã•
+	private final static int BLOCKSIZE = 25; // ³•ûŒ`ƒuƒƒbƒN‚Ì•Ó‚Ì’·‚³
 	private Image[] icon; // gray, red, yellow, purple, green, blue, orange, water
 
 	public GamePanel(View v) {
@@ -42,7 +42,7 @@ public class GamePanel extends JPanel{
 //		System.out.println("GamePanel.paintComponent");
 		super.paintComponent(g);
 		drawBG(g);
-		drawBlocks(g); // ã‚¢ã‚¯ãƒ†ã‚£ãƒ–ãƒ–ãƒ­ãƒƒã‚¯ã®æç”»
+		drawBlocks(g); // ƒAƒNƒeƒBƒuƒuƒƒbƒN‚Ì•`‰æ
 	}
 
 	/**
