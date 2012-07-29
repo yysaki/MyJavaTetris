@@ -5,20 +5,20 @@ import myJavaTetris.yysaki.com.Point;
 import java.util.Random;
 
 /**
- * ã‚¢ã‚¯ãƒ†ã‚£ãƒ–ãªãƒ†ãƒˆãƒªã‚¹ãƒ–ãƒ­ãƒƒã‚¯ã‚’ç”Ÿæˆã€ç®¡ç†ã™ã‚‹
+ * ƒAƒNƒeƒBƒu‚ÈƒeƒgƒŠƒXƒuƒƒbƒN‚ğ¶¬AŠÇ—‚·‚é
  * @author yysaki
  *
  */
 public class Blocks {
-	private final int color; // ãƒ–ãƒ­ãƒƒã‚¯ã®è‰²(imageã¯View classã§ç®¡ç†)
-	private final Point[] points; // å„ãƒ–ãƒ­ãƒƒã‚¯ä½ç½®
-	private final int rotatable; // å›è»¢å¯èƒ½ãªå›æ•°
+	private final int color; // ƒuƒƒbƒN‚ÌF(image‚ÍView class‚ÅŠÇ—)
+	private final Point[] points; // ŠeƒuƒƒbƒNˆÊ’u
+	private final int rotatable; // ‰ñ“]‰Â”\‚È‰ñ”
 
 	private Point dir;
 	private int rotate;
 
 	/**
-	 *  idã‚’ãƒ©ãƒ³ãƒ€ãƒ ç”Ÿæˆã—ãŸãƒ†ãƒˆãƒªã‚¹ãƒ–ãƒ­ãƒƒã‚¯
+	 *  id‚ğƒ‰ƒ“ƒ_ƒ€¶¬‚µ‚½ƒeƒgƒŠƒXƒuƒƒbƒN
 	 * @param dir
 	 * @param rotate
 	 */
@@ -27,7 +27,7 @@ public class Blocks {
 	}
 
 	/**
-	 * ã‚³ãƒ”ãƒ¼ã‚³ãƒ³ã‚¹ãƒˆãƒ©ã‚¯ã‚¿
+	 * ƒRƒs[ƒRƒ“ƒXƒgƒ‰ƒNƒ^
 	 * @param b
 	 */
 	public Blocks(Blocks b){
@@ -41,7 +41,7 @@ public class Blocks {
 	 * @param id
 	 */
 	public Blocks(Point dir, int rotate, int id){
-		// ãŠã‹ã—ã„å€¤ãŒå…¥ã£ã¦ãã‚‹æ™‚ æ£’å‹ã¨ã™ã‚‹
+		// ‚¨‚©‚µ‚¢’l‚ª“ü‚Á‚Ä‚­‚é –_Œ^‚Æ‚·‚é
 		if(id<1 || 8<id){
 			id = 1;
 		}
@@ -52,49 +52,49 @@ public class Blocks {
 		points = new Point[4];
 
 		switch(id){
-		case 1: // æ£’å½¢
+		case 1: // –_Œ`
 			rotatable = 2;
 			points[0] = new Point(0,0);
 			points[1] = new Point(-1,0);
 			points[2] = new Point(1,0);
 			points[3] = new Point(2,0);
 			break;
-		case 2: // æ­£æ–¹å½¢
+		case 2: // ³•ûŒ`
 			rotatable = 1;
 			points[0] = new Point(0,0);
 			points[1] = new Point(1,0);
 			points[2] = new Point(0,1);
 			points[3] = new Point(1,1);
 			break;
-		case 3: // Så‹1
+		case 3: // SŒ^1
 			rotatable = 2;
 			points[0] = new Point(0,0);
 			points[1] = new Point(-1,0);
 			points[2] = new Point(0,1);
 			points[3] = new Point(1,1);
 			break;
-		case 4: // Så‹2
+		case 4: // SŒ^2
 			rotatable = 2;
 			points[0] = new Point(0,0);
 			points[1] = new Point(1,0);
 			points[2] = new Point(0,1);
 			points[3] = new Point(-1,1);
 			break;
-		case 5: // éµå½¢1
+		case 5: // Œ®Œ`1
 			rotatable = 4;
 			points[0] = new Point(0,0);
 			points[1] = new Point(-1,0);
 			points[2] = new Point(1,0);
 			points[3] = new Point(-1,1);
 			break;
-		case 6: // éµå‹2
+		case 6: // Œ®Œ^2
 			rotatable = 4;
 			points[0] = new Point(0,0);
 			points[1] = new Point(-1,0);
 			points[2] = new Point(1,0);
 			points[3] = new Point(1,1);
 			break;
-		default: // Tå½¢
+		default: // TŒ`
 			rotatable = 4;
 			points[0] = new Point(0,0);
 			points[1] = new Point(-1,0);

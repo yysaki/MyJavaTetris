@@ -1,8 +1,8 @@
 package myJavaTetris.yysaki.com;
 
 /**
- * (x,y)åº§æ¨™ã‚ªãƒ–ã‚¸ã‚§ã‚¯ãƒˆ
- * (Dimensionã‚¯ãƒ©ã‚¹ã‚’ä½¿ãˆã°ä¸è¦ï¼Ÿ)
+ * (x,y)À•WƒIƒuƒWƒFƒNƒg
+ * (DimensionƒNƒ‰ƒX‚ğg‚¦‚Î•s—vH)
  * @author yysaki
  *
  */
