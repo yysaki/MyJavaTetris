@@ -8,12 +8,25 @@
     <property name="debuglevel" value="source,lines,vars"/>
     <property name="target" value="1.6"/>
     <property name="source" value="1.6"/>
+	<!-- add 20120730 -->
+	<property name="junit.jar" location="../../../../../App/eclipse/plugins/org.junit_4.8.1.v4_8_1_v20100427-1100/junit.jar"/>
+	<property name="core.jar" location="../../../../../App/eclipse/plugins/org.hamcrest.core_1.1.0.v20090501071000.jar"/>
+	<property name="bin.dir" location="bin"/>
+	<property name="doc.dir" location="doc"/>
+	<property name="index.dir" location="index"/>
+	<path id="project.classpath">
+        <pathelement location="${junit.jar}"/>
+        <pathelement location="${core.jar}"/>
+        <pathelement location="${bin.dir}"/>
+        <path refid="JUnit 4.libraryclasspath"/>
+	</path>	
+	<!-- added -->
     <path id="JUnit 4.libraryclasspath">
-        <pathelement location="../../../../../App/eclipse/plugins/org.junit_4.8.1.v4_8_1_v20100427-1100/junit.jar"/>
-        <pathelement location="../../../../../App/eclipse/plugins/org.hamcrest.core_1.1.0.v20090501071000.jar"/>
+        <pathelement location="${junit.jar}"/>
+        <pathelement location="${core.jar}"/>
     </path>
     <path id="MyJavaTetris.classpath">
-        <pathelement location="bin"/>
+        <pathelement location="${bin.dir}"/>
         <path refid="JUnit 4.libraryclasspath"/>
     </path>
     <target name="init">
@@ -62,9 +75,22 @@
         <property name="build.compiler" value="org.eclipse.jdt.core.JDTCompilerAdapter"/>
         <antcall target="build"/>
     </target>
-    <target name="MyTetris">
+    <target name="MyTetris" depends="build">
         <java classname="myJavaTetris.yysaki.com.MyTetris" failonerror="true" fork="yes">
             <classpath refid="MyJavaTetris.classpath"/>
         </java>
     </target>
+	<!-- add 20120730 -->
+	<target name="test" depends="build">
+		<junit haltonfailure="true">
+			<classpath refid="project.classpath" />
+			<formatter type="brief" usefile="false" />
+			<batchtest>
+				<fileset dir="${bin.dir}" includes="**/*Test.class" />
+			</batchtest>
+			<sysproperty key="doc.dir" value="${doc.dir}" />
+			<sysproperty key="index.dir" value="${index.dir}" />
+		</junit>
+	</target>
+	<!-- added -->
 </project>

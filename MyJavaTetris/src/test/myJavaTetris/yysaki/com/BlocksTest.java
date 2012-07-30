@@ -8,7 +8,7 @@ import myJavaTetris.yysaki.com.Point;
 
 import org.junit.Test;
 
-public class BlocksTest extends ProjectTest {
+public class BlocksTest extends ProjectTests {
 
 	@Test
 	public void testGetColor() {
