@@ -56,11 +56,19 @@ public class View extends JFrame {
 
 		imap.put(KeyStroke.getKeyStroke("UP"), actionUp);
 		amap.put(actionUp, actionUp);
+		imap.put(KeyStroke.getKeyStroke('k'), actionUp);
+		amap.put(actionUp, actionUp);
 		imap.put(KeyStroke.getKeyStroke("DOWN"), actionDown);
+		amap.put(actionDown, actionDown);
+		imap.put(KeyStroke.getKeyStroke('j'), actionDown);
 		amap.put(actionDown, actionDown);
 		imap.put(KeyStroke.getKeyStroke("RIGHT"), actionRight);
 		amap.put(actionRight, actionRight);
+		imap.put(KeyStroke.getKeyStroke('l'), actionRight);
+		amap.put(actionRight, actionRight);
 		imap.put(KeyStroke.getKeyStroke("LEFT"), actionLeft);
+		amap.put(actionLeft, actionLeft);
+		imap.put(KeyStroke.getKeyStroke('h'), actionLeft);
 		amap.put(actionLeft, actionLeft);
 
 		/* Tick */
