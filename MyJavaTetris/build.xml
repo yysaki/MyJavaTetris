@@ -1,4 +1,4 @@
-<?xml version="1.0" encoding="shift-jis" standalone="no"?>
+<?xml version="1.0" encoding="Shift_JIS" standalone="no"?>
 <!-- WARNING: Eclipse auto-generated file.
               Any modifications will be overwritten.
               To include a user specific buildfile here, simply create one in the same
@@ -9,8 +9,8 @@
     <property name="target" value="1.6"/>
     <property name="source" value="1.6"/>
 	<!-- add 20120730 -->
-	<property name="junit.jar" location="../../../../../App/eclipse/plugins/org.junit_4.8.1.v4_8_1_v20100427-1100/junit.jar"/>
-	<property name="core.jar" location="../../../../../App/eclipse/plugins/org.hamcrest.core_1.1.0.v20090501071000.jar"/>
+	<property name="junit.jar" location="vender/org.junit_4.8.1.v4_8_1_v20100427-1100/junit.jar"/>
+	<property name="core.jar" location="vender/org.hamcrest.core_1.1.0.v20090501071000.jar"/>
 	<property name="bin.dir" location="bin"/>
 	<property name="doc.dir" location="doc"/>
 	<property name="index.dir" location="index"/>
@@ -52,11 +52,11 @@
     <target name="build-subprojects"/>
     <target depends="init" name="build-project">
         <echo message="${ant.project.name}: ${ant.file}"/>
-        <javac debug="true" debuglevel="${debuglevel}" destdir="bin" source="${source}" target="${target}">
+        <javac debug="true" debuglevel="${debuglevel}" destdir="bin" source="${source}" target="${target}" encoding="Shift_JIS">
             <src path="src"/>
             <classpath refid="MyJavaTetris.classpath"/>
         </javac>
-        <javac debug="true" debuglevel="${debuglevel}" destdir="bin" source="${source}" target="${target}">
+        <javac debug="true" debuglevel="${debuglevel}" destdir="bin" source="${source}" target="${target}" encoding="Shift_JIS">
             <src path="res"/>
             <classpath refid="MyJavaTetris.classpath"/>
         </javac>
