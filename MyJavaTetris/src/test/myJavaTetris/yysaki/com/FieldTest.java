@@ -10,7 +10,7 @@ import org.junit.Test;
 import myJavaTetris.yysaki.com.Blocks;
 import myJavaTetris.yysaki.com.Point;
 
-public class FieldTest extends ProjectTest {
+public class FieldTest extends ProjectTests {
 
 	@Test
 	public void testSetAll() {
