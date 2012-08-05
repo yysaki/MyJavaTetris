@@ -14,7 +14,7 @@
 	<property name="bin.dir" location="bin"/>
 	<property name="doc.dir" location="doc"/>
 	<property name="index.dir" location="index"/>
-	<property name="test.xml.dir" location="${bin.dir}/test_results"/>
+	<property name="test.xml.dir" location="${bin.dir}/test-results"/>
 	<path id="project.classpath">
         <pathelement location="${junit.jar}"/>
         <pathelement location="${core.jar}"/>
