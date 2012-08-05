@@ -14,6 +14,7 @@
 	<property name="bin.dir" location="bin"/>
 	<property name="doc.dir" location="doc"/>
 	<property name="index.dir" location="index"/>
+	<property name="test.xml.dir" location="${bin.dir}/test_results"/>
 	<path id="project.classpath">
         <pathelement location="${junit.jar}"/>
         <pathelement location="${core.jar}"/>
@@ -80,17 +81,21 @@
             <classpath refid="MyJavaTetris.classpath"/>
         </java>
     </target>
-	<!-- add 20120730 -->
 	<target name="test" depends="build">
-		<junit haltonfailure="true">
-			<classpath refid="project.classpath" />
-			<formatter type="brief" usefile="false" />
-			<batchtest>
-				<fileset dir="${bin.dir}" includes="**/*Test.class" />
-			</batchtest>
-			<sysproperty key="doc.dir" value="${doc.dir}" />
-			<sysproperty key="index.dir" value="${index.dir}" />
-		</junit>
-	</target>
+        <delete dir="${test.xml.dir}" />
+        <mkdir  dir="${test.xml.dir}" />
+        <junit errorProperty="test.failed" failureProperty="test.failed">
+            <classpath refid="project.classpath" />
+            <formatter type="brief" usefile="false" />
+            <formatter type="xml" />
+            <batchtest todir="${test.xml.dir}">
+                <fileset dir="${bin.dir}" includes="**/*Test.class" />
+            </batchtest>
+            <sysproperty key="doc.dir" value="${doc.dir}" />
+            <sysproperty key="index.dir" value="${index.dir}" />
+        </junit>
+        <fail message="Tests failed! Check test reports."
+                if="test.failed" />
+</target>
 	<!-- added -->
 </project>
