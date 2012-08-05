@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<cruisecontrol>
+        <project name="MyJavaTetris" buildafterfailed="false">
+                <bootstrappers>
+                        <!--
+                        <currentbuildstatusbootstrapper file="logs/MyJavaTetris/currentbuildstatus.txt" />
+                        -->
+                </bootstrappers>
+                <modificationset quietperiod="60">
+                        <git LocalWorkingCopy="checkout/MyJavaTetris" />
+                </modificationset>
+                <schedule interval="60">
+                        <ant buildfile="cc-build.xml" target="build" />
+                </schedule>
+                <log dir="logs/MyJavaTetris">
+                        <merge dir="checkout/MyJavaTetris/bin/test-results" />
+                </log>
+                <publishers>
+                        <!--
+                        <currentbuildstatuspublisher file="logs/MyJavaTetris/currentbuildstatus.txt" />
+                        -->
+                </publishers>
+        </project>
+</cruisecontrol>
+
