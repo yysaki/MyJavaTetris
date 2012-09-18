@@ -20,6 +20,7 @@
         <arg value ="ssh://git@github.com:22/yysaki/MyJavaTetris.git"/>
       </args>
     </git>
-    <ant antfile="build.xml" dir="MyJavaTetris" target="test" />
+    <ant antfile="build.xml" dir="MyJavaTetris" target="build" />
+    <!-- nazo no error <ant antfile="build.xml" dir="MyJavaTetris" target="test" /> -->
   </target>
 </project>
