@@ -1,25 +1,25 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<project name="cc-build" default="build" basedir="checkout">
-        <target name="build">
-                <macrodef name = "git">
-                        <attribute name = "command" />
-                        <attribute name = "dir" default = "" />
-                        <element name = "args" optional = "true" />
-                        <sequential>
-                                <echo message = "git @{command}" />
-                                <exec executable = "git" dir = "@{dir}">
-                                        <arg value = "@{command}" />
-                                        <args/>
-                                </exec>
-                        </sequential>
-                </macrodef>
+<project name="build-MyJavaTetris" default="build" basedir="projects">
+  <target name="build">
+    <macrodef name = "git">
+      <attribute name = "command" />
+      <attribute name = "dir" default = "" />
+      <element name = "args" optional = "true" />
+      <sequential>
+        <echo message = "git @{command}" />
+        <exec executable = "git" dir = "@{dir}">
+          <arg value = "@{command}" />
+          <args/>
+        </exec>
+      </sequential>
+    </macrodef>
 
-                <delete dir="MyJavaTetris" />
-                <git command ="clone">
-                        <args>
-                                <arg value ="ssh://git@github.com:22/yysaki/MyJavaTetris.git"/>
-                        </args>
-                </git>
-                <ant antfile="build.xml" dir="MyJavaTetris" target="test" />
-        </target>
+    <delete dir="MyJavaTetris" />
+    <git command ="clone">
+      <args>
+        <arg value ="ssh://git@github.com:22/yysaki/MyJavaTetris.git"/>
+      </args>
+    </git>
+    <ant antfile="build.xml" dir="MyJavaTetris" target="test" />
+  </target>
 </project>

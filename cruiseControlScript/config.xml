@@ -1,25 +1,33 @@
-<?xml version="1.0" encoding="UTF-8" standalone="no"?>
 <cruisecontrol>
-        <project name="MyJavaTetris" buildafterfailed="false">
-                <bootstrappers>
-                        <!--
-                        <currentbuildstatusbootstrapper file="logs/MyJavaTetris/currentbuildstatus.txt" />
-                        -->
-                </bootstrappers>
-                <modificationset quietperiod="60">
-                        <git LocalWorkingCopy="checkout/MyJavaTetris" />
-                </modificationset>
-                <schedule interval="60">
-                        <ant buildfile="cc-build.xml" target="build" />
-                </schedule>
-                <log dir="logs/MyJavaTetris">
-                        <merge dir="checkout/MyJavaTetris/bin/test-results" />
-                </log>
-                <publishers>
-                        <!--
-                        <currentbuildstatuspublisher file="logs/MyJavaTetris/currentbuildstatus.txt" />
-                        -->
-                </publishers>
-        </project>
-</cruisecontrol>
+  <project name="MyJavaTetris" buildafterfailed="true">
+    <listeners>
+      <currentbuildstatuslistener
+        file="logs/MyJavaTetris/status.txt"/>
+    </listeners>
 
+    <!-- Bootstrappers are run every time the build runs,
+                                                 *before* the modification checks -->
+    <bootstrappers>
+    </bootstrappers>
+
+    <!-- Defines where CruiseControl looks for changes, to decide
+                            whether to run the build -->
+    <modificationset quietperiod="10">
+      <cvs localworkingcopy="projects/MyJavaTetris"/>
+    </modificationset>
+
+    <!-- Configures the actual build loop, how often and which
+                                  build file/target -->
+    <schedule interval="60">
+      <ant buildfile="build-MyJavaTetris.xml"
+        uselogger="true"/>
+    </schedule>
+
+    <!-- directory to write build logs to -->
+    <log/>
+
+    <!-- Publishers are run *after* a build completes -->
+    <publishers>
+    </publishers>
+  </project>
+</cruisecontrol>
