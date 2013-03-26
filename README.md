@@ -11,4 +11,4 @@ JUnit勉強用に拵えたテトリスの習作です
 * `git clone https://github.com/yysaki/MyJavaTetris.git`
 * `cd MyJavaTetris`
 * `ant test`
-* `ant MyTetris`
+* `ant Main`
