@@ -12,6 +12,7 @@ public class Field {
 	private final static int WALL = 7;
 	
 	private final int width, height;
+	/** フィールドの堆積状況 */
 	private int[][] statuses;
 	
 	public Field(int w, int h){

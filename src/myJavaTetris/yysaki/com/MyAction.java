@@ -12,7 +12,7 @@ import myJavaTetris.yysaki.com.View;
  */
 @SuppressWarnings("serial")
 class MyAction extends AbstractAction {
-	private View v;
+	private View _v;
 
 	/**
 	 * ƒAƒNƒVƒ‡ƒ“Žž‚ÌˆÚ“®•ûŒü
@@ -31,7 +31,7 @@ class MyAction extends AbstractAction {
 	private final String KEY;
 
 	public MyAction(String key, View v){
-		this.v = v;
+		this._v = v;
 		this.KEY = key;
 		if(key=="UP"){
 			dir = new Point(0,0);
@@ -42,8 +42,12 @@ class MyAction extends AbstractAction {
 		}else if(key=="RIGHT"){
 			dir = new Point(1,0);
 			rotate = 0;
-		}else{ // if(key=="LEFT")
+		}else if(key=="LEFT"){
 			dir = new Point(-1,0);
+			rotate = 0;
+		}else{ // if(key=="tick")
+			// dummy
+			dir = new Point(0,0); 
 			rotate = 0;
 		}
 	}
@@ -55,12 +59,12 @@ class MyAction extends AbstractAction {
 		System.out.println(KEY);
 
 		if(isMovable()){
-			final Blocks b = v.getBlocks();
+			final Blocks b = _v.getGamePanel().getBlocks();
 			b.setDir(new Point(b.getDir().getX()+dir.getX(), b.getDir().getY()+dir.getY()));
 			b.setRotate((b.getRotate() + rotate) % b.getRotatable());
-			v.repaint();
+			_v.repaint();
 		}else if(KEY=="DOWN" || KEY=="tick"){
-			v.next();
+			_v.getGamePanel().next();
 		}
 	}
 
@@ -70,11 +74,11 @@ class MyAction extends AbstractAction {
 	 * @return
 	 */
 	private Boolean isMovable(){
-		Blocks next = new Blocks(v.getBlocks());
+		Blocks next = new Blocks(_v.getGamePanel().getBlocks());
 		next.setDir(new Point(next.getDir().getX() + dir.getX(), next.getDir().getY() + dir.getY()));
 		next.setRotate(next.getRotate() + rotate);
 		
-		if(v.getField().canBeSetBlocks(next)){
+		if(_v.getGamePanel().getField().canBeSetBlocks(next)){
 			return true;
 		}else{
 			return false;
