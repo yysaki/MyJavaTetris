@@ -7,18 +7,18 @@ package myJavaTetris.yysaki.com;
  *
  */
 public class Point {
-	private final int x, y;
+	private final int _x, _y;
 
 	public Point(){
 		this(0,0);
 	}
 	public Point(int x, int y){
-		this.x = x; this.y = y;
+		this._x = x; this._y = y;
 	}
 	public int getX(){
-		return x;
+		return _x;
 	}
 	public int getY(){
-		return y;
+		return _y;
 	}
 }
