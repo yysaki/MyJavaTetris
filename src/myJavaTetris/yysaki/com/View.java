@@ -36,9 +36,6 @@ public class View extends JFrame {
 
 		setKeyStrokes();
 
-		/* Tick */
-		new Timer(1000, new Controller("tick", this)).start();
-
 		setVisible(true);
 	}
 	

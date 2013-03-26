@@ -6,6 +6,7 @@ import javax.swing.*;
 
 import myJavaTetris.yysaki.com.GameBlocks;
 import myJavaTetris.yysaki.com.GameField;
+import myJavaTetris.yysaki.com.GameTimer;
 import myJavaTetris.yysaki.com.View;
 
 
@@ -21,33 +22,36 @@ public class GamePanel extends JPanel{
 	private GameField _field;
 	private Boolean _isGameOver = false;
 	
-	private final Point start; // アクティブブロックのスタート地点
-	private final static int BLOCKSIZE = 25; // 正方形ブロックの辺の長さ
-	private Image[] icon; // gray, red, yellow, purple, green, blue, orange, water
+	private final Point _start; // アクティブブロックのスタート地点
+	private final static int _blocksize = 25; // 正方形ブロックの辺の長さ
+	private Image[] _icon; // gray, red, yellow, purple, green, blue, orange, water
 
 	public GamePanel(View v, int w, int h) {
 		super();
 		System.out.println("GamePanel Constructor");
 		
 		this._v = v;
-		start = new Point(w/2, 0);
-		setBlocks(new GameBlocks(start, 0));
+		_start = new Point(w/2, 0);
+		setBlocks(new GameBlocks(_start, 0));
 		setField(new GameField(w, h));
 		
 		/* panel size */
-		setPreferredSize(new Dimension(getField().getWidth()*BLOCKSIZE, getField().getHeight()*BLOCKSIZE));
+		setPreferredSize(new Dimension(getField().getWidth()*_blocksize, getField().getHeight()*_blocksize));
 
 		/* set image */
-		icon = new Image[8];
-		icon[0] = Toolkit.getDefaultToolkit().getImage("res/tetris_gray.jpg");
-		icon[1] = Toolkit.getDefaultToolkit().getImage("res/tetris_red.jpg");
-		icon[2] = Toolkit.getDefaultToolkit().getImage("res/tetris_yellow.jpg");
-		icon[3] = Toolkit.getDefaultToolkit().getImage("res/tetris_purple.jpg");
-		icon[4] = Toolkit.getDefaultToolkit().getImage("res/tetris_green.jpg");
-		icon[5] = Toolkit.getDefaultToolkit().getImage("res/tetris_blue.jpg");
-		icon[6] = Toolkit.getDefaultToolkit().getImage("res/tetris_orange.jpg");
-		icon[7] = Toolkit.getDefaultToolkit().getImage("res/tetris_water.jpg");
-		
+		_icon = new Image[8];
+		_icon[0] = Toolkit.getDefaultToolkit().getImage("res/tetris_gray.jpg");
+		_icon[1] = Toolkit.getDefaultToolkit().getImage("res/tetris_red.jpg");
+		_icon[2] = Toolkit.getDefaultToolkit().getImage("res/tetris_yellow.jpg");
+		_icon[3] = Toolkit.getDefaultToolkit().getImage("res/tetris_purple.jpg");
+		_icon[4] = Toolkit.getDefaultToolkit().getImage("res/tetris_green.jpg");
+		_icon[5] = Toolkit.getDefaultToolkit().getImage("res/tetris_blue.jpg");
+		_icon[6] = Toolkit.getDefaultToolkit().getImage("res/tetris_orange.jpg");
+		_icon[7] = Toolkit.getDefaultToolkit().getImage("res/tetris_water.jpg");
+
+
+		/* Tick */
+		new Timer(1000, new GameTimer(_v)).start();
 	}
 
 	public void paintComponent(Graphics g){
@@ -78,7 +82,7 @@ public class GamePanel extends JPanel{
 		repaint();
 
 		// setNextBlocks
-		setBlocks(new GameBlocks(start, 0));
+		setBlocks(new GameBlocks(_start, 0));
 
 		// set blocks & check game over
 		if(!getField().canBeSetBlocks(getBlocks())){
@@ -86,7 +90,7 @@ public class GamePanel extends JPanel{
 			setIsGameOver(true);
 			getField().setAll(1);
 
-			setBlocks(new GameBlocks(start,0,1)); // バッドノウハウ アクティブブロックをGameOver色背景に埋める
+			setBlocks(new GameBlocks(_start,0,1)); // バッドノウハウ アクティブブロックをGameOver色背景に埋める
 			repaint();
 
 		}
@@ -120,7 +124,7 @@ public class GamePanel extends JPanel{
 	private void drawBlock(Graphics g, int color, int x, int y){
 		//			System.out.println("drawBlock color:" + color + ", x:" + x + ", y:" + y);
 		//		System.out.println("drawBlock color:" + color);
-		g.drawImage(icon[color], x*BLOCKSIZE, y*BLOCKSIZE, this);		
+		g.drawImage(_icon[color], x*_blocksize, y*_blocksize, this);		
 	}
 
 	public Boolean getIsGameOver(){ return _isGameOver; }
