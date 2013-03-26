@@ -6,6 +6,7 @@ import java.awt.event.*;
 
 import myJavaTetris.yysaki.com.GamePanel;
 import myJavaTetris.yysaki.com.Controller;
+import myJavaTetris.yysaki.com.Model;
 
 /**
  * ゲームウインドウの管理
@@ -15,6 +16,7 @@ import myJavaTetris.yysaki.com.Controller;
 @SuppressWarnings("serial")
 public class View extends JFrame {
 	private GamePanel _gamePanel; 
+	private Model _model;
 
 	/**
 	 * @param w GamePanelの幅毎のブロック数
@@ -24,7 +26,8 @@ public class View extends JFrame {
 		System.out.println("View constructor");
 
 		/* set Frame */
-		_gamePanel = new GamePanel(this, w, h);
+		_model = new Model(this);
+		_gamePanel = new GamePanel(this, _model, w, h);
 		getContentPane().add(_gamePanel);
 		pack();
 		setResizable(false);

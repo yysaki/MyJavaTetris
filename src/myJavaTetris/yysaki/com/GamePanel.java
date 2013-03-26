@@ -1,14 +1,11 @@
 package myJavaTetris.yysaki.com;
 
-
 import java.awt.*;
 import javax.swing.*;
 
 import myJavaTetris.yysaki.com.GameBlocks;
 import myJavaTetris.yysaki.com.GameField;
-import myJavaTetris.yysaki.com.GameTimer;
 import myJavaTetris.yysaki.com.View;
-
 
 /**
  * テトリス画面(JPanel)の管理
@@ -17,20 +14,21 @@ import myJavaTetris.yysaki.com.View;
  */
 @SuppressWarnings("serial")
 public class GamePanel extends JPanel{
-	private View _v;
+	private View _view;
+	private Model _model;
 	private GameBlocks _blocks;
 	private GameField _field;
-	private Boolean _isGameOver = false;
 	
 	private final Point _start; // アクティブブロックのスタート地点
 	private final static int _blocksize = 25; // 正方形ブロックの辺の長さ
 	private Image[] _icon; // gray, red, yellow, purple, green, blue, orange, water
 
-	public GamePanel(View v, int w, int h) {
+	public GamePanel(View v, Model m, int w, int h) {
 		super();
 		System.out.println("GamePanel Constructor");
 		
-		this._v = v;
+		this._view = v;
+		this._model = m;
 		_start = new Point(w/2, 0);
 		setBlocks(new GameBlocks(_start, 0));
 		setField(new GameField(w, h));
@@ -48,10 +46,6 @@ public class GamePanel extends JPanel{
 		_icon[5] = Toolkit.getDefaultToolkit().getImage("res/tetris_blue.jpg");
 		_icon[6] = Toolkit.getDefaultToolkit().getImage("res/tetris_orange.jpg");
 		_icon[7] = Toolkit.getDefaultToolkit().getImage("res/tetris_water.jpg");
-
-
-		/* Tick */
-		new Timer(1000, new GameTimer(_v)).start();
 	}
 
 	public void paintComponent(Graphics g){
@@ -65,35 +59,7 @@ public class GamePanel extends JPanel{
 	 * 地面に設置した時、新しいテトリスブロックを出現させる
 	 */
 	public void next(){
-		System.out.println("next");
-
-		// check isGameOver
-		if(getIsGameOver()){
-			return;
-		}
-
-		Boolean pileSucceeded = getField().pileBlocks(getBlocks());
-		if(!pileSucceeded){
-			System.out.println("pile is failed");
-		}
-
-		getField().deleteLines();
-
-		repaint();
-
-		// setNextBlocks
-		setBlocks(new GameBlocks(_start, 0));
-
-		// set blocks & check game over
-		if(!getField().canBeSetBlocks(getBlocks())){
-			System.out.println("Game Over!!!");
-			setIsGameOver(true);
-			getField().setAll(1);
-
-			setBlocks(new GameBlocks(_start,0,1)); // バッドノウハウ アクティブブロックをGameOver色背景に埋める
-			repaint();
-
-		}
+		_model.next();
 	}
 
 	
@@ -126,14 +92,12 @@ public class GamePanel extends JPanel{
 		//		System.out.println("drawBlock color:" + color);
 		g.drawImage(_icon[color], x*_blocksize, y*_blocksize, this);		
 	}
-
-	public Boolean getIsGameOver(){ return _isGameOver; }
-	public void setIsGameOver(Boolean arg){ _isGameOver = arg; }
 	
 	public GameField getField(){ return _field; }
 	public void setField(GameField arg){ _field = arg; }
 
 	public GameBlocks getBlocks(){ return _blocks; }
 	public void setBlocks(GameBlocks arg){ _blocks = arg; }
-
+	
+	public Point getStartPoint(){ return _start; }
 }
