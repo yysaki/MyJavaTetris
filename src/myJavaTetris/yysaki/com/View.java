@@ -5,7 +5,7 @@ import java.awt.*;
 import java.awt.event.*;
 
 import myJavaTetris.yysaki.com.GamePanel;
-import myJavaTetris.yysaki.com.MyAction;
+import myJavaTetris.yysaki.com.Controller;
 
 /**
  * ゲームウインドウの管理
@@ -37,7 +37,7 @@ public class View extends JFrame {
 		setKeyStrokes();
 
 		/* Tick */
-		new Timer(1000, new MyAction("tick", this)).start();
+		new Timer(1000, new Controller("tick", this)).start();
 
 		setVisible(true);
 	}
@@ -49,10 +49,10 @@ public class View extends JFrame {
 		InputMap imap = _gamePanel.getInputMap(JComponent.WHEN_IN_FOCUSED_WINDOW);
 		ActionMap amap = _gamePanel.getActionMap();
 
-		MyAction actionUp = new MyAction("UP", this);
-		MyAction actionDown = new MyAction("DOWN", this);
-		MyAction actionRight = new MyAction("RIGHT", this);
-		MyAction actionLeft = new MyAction("LEFT", this);
+		Controller actionUp = new Controller("UP", this);
+		Controller actionDown = new Controller("DOWN", this);
+		Controller actionRight = new Controller("RIGHT", this);
+		Controller actionLeft = new Controller("LEFT", this);
 
 		imap.put(KeyStroke.getKeyStroke("UP"), actionUp);
 		amap.put(actionUp, actionUp);

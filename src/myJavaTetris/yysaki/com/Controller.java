@@ -11,7 +11,7 @@ import myJavaTetris.yysaki.com.View;
  *
  */
 @SuppressWarnings("serial")
-class MyAction extends AbstractAction {
+class Controller extends AbstractAction {
 	private View _v;
 
 	/**
@@ -30,7 +30,7 @@ class MyAction extends AbstractAction {
 	 */
 	private final String KEY;
 
-	public MyAction(String key, View v){
+	public Controller(String key, View v){
 		this._v = v;
 		this.KEY = key;
 		if(key=="UP"){
@@ -59,7 +59,7 @@ class MyAction extends AbstractAction {
 		System.out.println(KEY);
 
 		if(isMovable()){
-			final Blocks b = _v.getGamePanel().getBlocks();
+			final GameBlocks b = _v.getGamePanel().getBlocks();
 			b.setDir(new Point(b.getDir().getX()+dir.getX(), b.getDir().getY()+dir.getY()));
 			b.setRotate((b.getRotate() + rotate) % b.getRotatable());
 			_v.repaint();
@@ -74,7 +74,7 @@ class MyAction extends AbstractAction {
 	 * @return
 	 */
 	private Boolean isMovable(){
-		Blocks next = new Blocks(_v.getGamePanel().getBlocks());
+		GameBlocks next = new GameBlocks(_v.getGamePanel().getBlocks());
 		next.setDir(new Point(next.getDir().getX() + dir.getX(), next.getDir().getY() + dir.getY()));
 		next.setRotate(next.getRotate() + rotate);
 		

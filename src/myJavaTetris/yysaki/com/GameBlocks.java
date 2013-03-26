@@ -9,7 +9,7 @@ import java.util.Random;
  * @author yysaki
  *
  */
-public class Blocks {
+public class GameBlocks {
 	private final int color; // ブロックの色(imageはView classで管理)
 	private final Point[] points; // 各ブロック位置
 	private final int rotatable; // 回転可能な回数
@@ -22,7 +22,7 @@ public class Blocks {
 	 * @param dir
 	 * @param rotate
 	 */
-	public Blocks(Point dir, int rotate){
+	public GameBlocks(Point dir, int rotate){
 		this(dir, rotate, (new Random().nextInt(7))+1);
 	}
 
@@ -30,7 +30,7 @@ public class Blocks {
 	 * コピーコンストラクタ
 	 * @param b
 	 */
-	public Blocks(Blocks b){
+	public GameBlocks(GameBlocks b){
 		this(b.getDir(), b.getRotate(), b.getColor());
 	}
 
@@ -40,7 +40,7 @@ public class Blocks {
 	 * @param rotate
 	 * @param id
 	 */
-	public Blocks(Point dir, int rotate, int id){
+	public GameBlocks(Point dir, int rotate, int id){
 		// おかしい値が入ってくる時 棒型とする
 		if(id<1 || 8<id){
 			id = 1;

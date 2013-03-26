@@ -8,8 +8,8 @@ public class AllTests {
 	public static Test suite() {
 		TestSuite suite = new TestSuite(AllTests.class.getName());
 		//$JUnit-BEGIN$
-		suite.addTestSuite(FieldTest.class);
-		suite.addTestSuite(BlocksTest.class);
+		suite.addTestSuite(GameFieldTest.class);
+		suite.addTestSuite(GameBlocksTest.class);
 		//$JUnit-END$
 		return suite;
 	}

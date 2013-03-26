@@ -1,13 +1,13 @@
 package myJavaTetris.yysaki.com;
 
-import myJavaTetris.yysaki.com.Blocks;
+import myJavaTetris.yysaki.com.GameBlocks;
 
 /**
  * ブロックの堆積状況を表すクラス
  * @author yysaki
  *
  */
-public class Field {
+public class GameField {
 	private final static int EMPTY = 0;
 	private final static int WALL = 7;
 	
@@ -15,7 +15,7 @@ public class Field {
 	/** フィールドの堆積状況 */
 	private int[][] statuses;
 	
-	public Field(int w, int h){
+	public GameField(int w, int h){
 		width = w; height = h;
 		statuses = new int[w+1][h+1];
 		
@@ -51,7 +51,7 @@ public class Field {
 	 * @param b
 	 * @return フィールド上のブロックを塗り替えること無く配置出来たか
 	 */
-	public Boolean pileBlocks(Blocks b){
+	public Boolean pileBlocks(GameBlocks b){
 		Boolean ret = true;
 		for(int i=0;i<b.getPoints().length;i++){
 			final Point p = b.getPoints()[i];
@@ -112,7 +112,7 @@ public class Field {
 	 * @param b
 	 * @return フィールドに配置出来るか
 	 */
-	public Boolean canBeSetBlocks(Blocks b){
+	public Boolean canBeSetBlocks(GameBlocks b){
 		for(int i=0;i<b.getPoints().length;i++){
 			final Point p = b.getPoints()[i];
 			final int x = b.getDir().getX() + p.getX() * (int)Math.cos((b.getRotate())*Math.PI/2) + p.getY() * (int)Math.sin((b.getRotate())*Math.PI/2);

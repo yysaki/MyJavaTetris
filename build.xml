@@ -76,8 +76,8 @@
         <property name="build.compiler" value="org.eclipse.jdt.core.JDTCompilerAdapter"/>
         <antcall target="build"/>
     </target>
-    <target name="MyTetris" depends="build">
-        <java classname="myJavaTetris.yysaki.com.MyTetris" failonerror="true" fork="yes">
+    <target name="Main" depends="build">
+        <java classname="myJavaTetris.yysaki.com.Main" failonerror="true" fork="yes">
             <classpath refid="MyJavaTetris.classpath"/>
         </java>
     </target>

@@ -4,8 +4,8 @@ package myJavaTetris.yysaki.com;
 import java.awt.*;
 import javax.swing.*;
 
-import myJavaTetris.yysaki.com.Blocks;
-import myJavaTetris.yysaki.com.Field;
+import myJavaTetris.yysaki.com.GameBlocks;
+import myJavaTetris.yysaki.com.GameField;
 import myJavaTetris.yysaki.com.View;
 
 
@@ -16,9 +16,9 @@ import myJavaTetris.yysaki.com.View;
  */
 @SuppressWarnings("serial")
 public class GamePanel extends JPanel{
-	private View v;
-	private Blocks _blocks;
-	private Field _field;
+	private View _v;
+	private GameBlocks _blocks;
+	private GameField _field;
 	private Boolean _isGameOver = false;
 	
 	private final Point start; // アクティブブロックのスタート地点
@@ -29,10 +29,10 @@ public class GamePanel extends JPanel{
 		super();
 		System.out.println("GamePanel Constructor");
 		
-		this.v = v;
+		this._v = v;
 		start = new Point(w/2, 0);
-		setBlocks(new Blocks(start, 0));
-		setField(new Field(w, h));
+		setBlocks(new GameBlocks(start, 0));
+		setField(new GameField(w, h));
 		
 		/* panel size */
 		setPreferredSize(new Dimension(getField().getWidth()*BLOCKSIZE, getField().getHeight()*BLOCKSIZE));
@@ -78,7 +78,7 @@ public class GamePanel extends JPanel{
 		repaint();
 
 		// setNextBlocks
-		setBlocks(new Blocks(start, 0));
+		setBlocks(new GameBlocks(start, 0));
 
 		// set blocks & check game over
 		if(!getField().canBeSetBlocks(getBlocks())){
@@ -86,7 +86,7 @@ public class GamePanel extends JPanel{
 			setIsGameOver(true);
 			getField().setAll(1);
 
-			setBlocks(new Blocks(start,0,1)); // バッドノウハウ アクティブブロックをGameOver色背景に埋める
+			setBlocks(new GameBlocks(start,0,1)); // バッドノウハウ アクティブブロックをGameOver色背景に埋める
 			repaint();
 
 		}
@@ -106,7 +106,7 @@ public class GamePanel extends JPanel{
 	}
 
 	private void drawBlocks(Graphics g){
-		Blocks b = getBlocks();
+		GameBlocks b = getBlocks();
 		for(int i=0;i<b.getPoints().length;i++){
 			final Point p = b.getPoints()[i];
 			final int dx = b.getDir().getX() + p.getX() * (int)Math.cos(b.getRotate()*Math.PI/2) + p.getY() * (int)Math.sin(b.getRotate()*Math.PI/2);
@@ -126,10 +126,10 @@ public class GamePanel extends JPanel{
 	public Boolean getIsGameOver(){ return _isGameOver; }
 	public void setIsGameOver(Boolean arg){ _isGameOver = arg; }
 	
-	public Field getField(){ return _field; }
-	public void setField(Field arg){ _field = arg; }
+	public GameField getField(){ return _field; }
+	public void setField(GameField arg){ _field = arg; }
 
-	public Blocks getBlocks(){ return _blocks; }
-	public void setBlocks(Blocks arg){ _blocks = arg; }
+	public GameBlocks getBlocks(){ return _blocks; }
+	public void setBlocks(GameBlocks arg){ _blocks = arg; }
 
 }
