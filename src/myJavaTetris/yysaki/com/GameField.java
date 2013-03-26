@@ -8,38 +8,38 @@ import myJavaTetris.yysaki.com.GameBlocks;
  *
  */
 public class GameField {
-	private final static int EMPTY = 0;
-	private final static int WALL = 7;
+	private final static int _empty = 0;
+	private final static int _wall = 7;
 	
-	private final int width, height;
+	private final int _width, _height;
 	/** フィールドの堆積状況 */
-	private int[][] statuses;
+	private int[][] _statuses;
 	
 	public GameField(int w, int h){
-		width = w; height = h;
-		statuses = new int[w+1][h+1];
+		_width = w; _height = h;
+		_statuses = new int[w+1][h+1];
 		
 		resetStatuses();
 	}
 	
 	private void resetStatuses(){
-		for(int i=0;i<statuses.length;i++){
-			for(int j=0;j<statuses[0].length;j++){
-				statuses[i][j] = EMPTY;
+		for(int i=0;i<_statuses.length;i++){
+			for(int j=0;j<_statuses[0].length;j++){
+				_statuses[i][j] = _empty;
 			}
 		}
-		for(int i=0;i<statuses.length;i++){
-			statuses[i][statuses[0].length-1] = WALL;
+		for(int i=0;i<_statuses.length;i++){
+			_statuses[i][_statuses[0].length-1] = _wall;
 		}
-		for(int j=0;j<statuses[0].length;j++){
-			statuses[statuses.length-1][j] = WALL;
+		for(int j=0;j<_statuses[0].length;j++){
+			_statuses[_statuses.length-1][j] = _wall;
 		}		
 	}
 	
 	public void setAll(int id){
-		for(int i=0;i<width;i++){
-			for(int j=0;j<height;j++){
-				statuses[i][j] = id;
+		for(int i=0;i<_width;i++){
+			for(int j=0;j<_height;j++){
+				_statuses[i][j] = id;
 			}
 		}
 	}
@@ -57,10 +57,10 @@ public class GameField {
 			final Point p = b.getPoints()[i];
 			final int x = b.getDir().getX() + p.getX() * (int)Math.cos((b.getRotate())*Math.PI/2) + p.getY() * (int)Math.sin((b.getRotate())*Math.PI/2);
 			final int y = b.getDir().getY() + -1 * p.getX() * (int)Math.sin((b.getRotate())*Math.PI/2) + p.getY() * (int)Math.cos((b.getRotate())*Math.PI/2);
-			if(statuses[x][y]!=EMPTY){
+			if(_statuses[x][y]!=_empty){
 				ret = false;
 			}
-			statuses[x][y] = b.getColor();
+			_statuses[x][y] = b.getColor();
 		}
 		
 		return ret;
@@ -71,11 +71,11 @@ public class GameField {
 		
 		while(deletableY>=0){
 			for(int j=deletableY;j>=0;j--){
-				for(int i=0;i<width;i++){
+				for(int i=0;i<_width;i++){
 					if(j!=0){
-						statuses[i][j] = statuses[i][j-1];
+						_statuses[i][j] = _statuses[i][j-1];
 					}else{
-						statuses[i][j] = 0;
+						_statuses[i][j] = 0;
 					}
 				}
 			}
@@ -91,10 +91,10 @@ public class GameField {
 	 */
 	private int hasDeletable(){
 		// check isDeletable
-		for(int j=height-1;j>=0;j--){
+		for(int j=_height-1;j>=0;j--){
 			Boolean isDeletable = true;
-			for(int i=0;i<width;i++){
-				if(statuses[i][j]==0){
+			for(int i=0;i<_width;i++){
+				if(_statuses[i][j]==0){
 					isDeletable = false;
 				}
 			}
@@ -118,17 +118,17 @@ public class GameField {
 			final int x = b.getDir().getX() + p.getX() * (int)Math.cos((b.getRotate())*Math.PI/2) + p.getY() * (int)Math.sin((b.getRotate())*Math.PI/2);
 			final int y = b.getDir().getY() + -1 * p.getX() * (int)Math.sin((b.getRotate())*Math.PI/2) + p.getY() * (int)Math.cos((b.getRotate())*Math.PI/2);
 
-			if(x<0 || (statuses.length-1)<x || y<0 || (statuses[0].length-1)<y){
+			if(x<0 || (_statuses.length-1)<x || y<0 || (_statuses[0].length-1)<y){
 				return false;
 			}
-			if(statuses[x][y]!=0){
+			if(_statuses[x][y]!=0){
 				return false;
 			}
 		}
 		return true;
 	}
 	
-	public int getStatus(int x, int y){ return statuses[x][y]; }
-	public int getWidth(){ return width; }
-	public int getHeight(){ return height; }
+	public int getStatus(int x, int y){ return _statuses[x][y]; }
+	public int getWidth(){ return _width; }
+	public int getHeight(){ return _height; }
 }

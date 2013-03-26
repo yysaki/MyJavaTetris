@@ -10,12 +10,12 @@ import java.util.Random;
  *
  */
 public class GameBlocks {
-	private final int color; // ブロックの色(imageはView classで管理)
-	private final Point[] points; // 各ブロック位置
-	private final int rotatable; // 回転可能な回数
+	private final int _color; // ブロックの色(imageはView classで管理)
+	private final Point[] _points; // 各ブロック位置
+	private final int _rotatable; // 回転可能な回数
 
-	private Point dir;
-	private int rotate;
+	private Point _dir;
+	private int _rotate;
 
 	/**
 	 *  idをランダム生成したテトリスブロック
@@ -48,74 +48,74 @@ public class GameBlocks {
 
 		System.out.println("new Blocks id:" + id);
 
-		color = id;
-		points = new Point[4];
+		_color = id;
+		_points = new Point[4];
 
 		switch(id){
 		case 1: // 棒形
-			rotatable = 2;
-			points[0] = new Point(0,0);
-			points[1] = new Point(-1,0);
-			points[2] = new Point(1,0);
-			points[3] = new Point(2,0);
+			_rotatable = 2;
+			_points[0] = new Point(0,0);
+			_points[1] = new Point(-1,0);
+			_points[2] = new Point(1,0);
+			_points[3] = new Point(2,0);
 			break;
 		case 2: // 正方形
-			rotatable = 1;
-			points[0] = new Point(0,0);
-			points[1] = new Point(1,0);
-			points[2] = new Point(0,1);
-			points[3] = new Point(1,1);
+			_rotatable = 1;
+			_points[0] = new Point(0,0);
+			_points[1] = new Point(1,0);
+			_points[2] = new Point(0,1);
+			_points[3] = new Point(1,1);
 			break;
 		case 3: // S型1
-			rotatable = 2;
-			points[0] = new Point(0,0);
-			points[1] = new Point(-1,0);
-			points[2] = new Point(0,1);
-			points[3] = new Point(1,1);
+			_rotatable = 2;
+			_points[0] = new Point(0,0);
+			_points[1] = new Point(-1,0);
+			_points[2] = new Point(0,1);
+			_points[3] = new Point(1,1);
 			break;
 		case 4: // S型2
-			rotatable = 2;
-			points[0] = new Point(0,0);
-			points[1] = new Point(1,0);
-			points[2] = new Point(0,1);
-			points[3] = new Point(-1,1);
+			_rotatable = 2;
+			_points[0] = new Point(0,0);
+			_points[1] = new Point(1,0);
+			_points[2] = new Point(0,1);
+			_points[3] = new Point(-1,1);
 			break;
 		case 5: // 鍵形1
-			rotatable = 4;
-			points[0] = new Point(0,0);
-			points[1] = new Point(-1,0);
-			points[2] = new Point(1,0);
-			points[3] = new Point(-1,1);
+			_rotatable = 4;
+			_points[0] = new Point(0,0);
+			_points[1] = new Point(-1,0);
+			_points[2] = new Point(1,0);
+			_points[3] = new Point(-1,1);
 			break;
 		case 6: // 鍵型2
-			rotatable = 4;
-			points[0] = new Point(0,0);
-			points[1] = new Point(-1,0);
-			points[2] = new Point(1,0);
-			points[3] = new Point(1,1);
+			_rotatable = 4;
+			_points[0] = new Point(0,0);
+			_points[1] = new Point(-1,0);
+			_points[2] = new Point(1,0);
+			_points[3] = new Point(1,1);
 			break;
 		default: // T形
-			rotatable = 4;
-			points[0] = new Point(0,0);
-			points[1] = new Point(-1,0);
-			points[2] = new Point(1,0);
-			points[3] = new Point(0,1);
+			_rotatable = 4;
+			_points[0] = new Point(0,0);
+			_points[1] = new Point(-1,0);
+			_points[2] = new Point(1,0);
+			_points[3] = new Point(0,1);
 			break;
 		}
 		
-		this.rotate = rotate % rotatable;
-		this.dir = dir;
+		this._rotate = rotate % _rotatable;
+		this._dir = dir;
 
 	}
 
-	public int getColor()    { return color; }
-	public Point[] getPoints(){ return points; }
-	public int getRotatable(){ return rotatable; }
+	public int getColor()    { return _color; }
+	public Point[] getPoints(){ return _points; }
+	public int getRotatable(){ return _rotatable; }
 
-	public Point getDir()    { return dir; }
-	public int getRotate()   { return rotate; }
-	public void setDir(Point p)      { dir = p; }
+	public Point getDir()    { return _dir; }
+	public int getRotate()   { return _rotate; }
+	public void setDir(Point p)      { _dir = p; }
 	public void setRotate(int r){
-		rotate = r % rotatable;
+		_rotate = r % _rotatable;
 	}
 }
