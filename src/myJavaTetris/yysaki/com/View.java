@@ -37,41 +37,11 @@ public class View extends JFrame {
 			}
 		});
 
-		setKeyStrokes();
+		_model.setKeyStrokes();
 
 		setVisible(true);
 	}
 	
-	/**
-	 * ÉLÅ[ì¸óÕÇÃê›íË
-	 */
-	private void setKeyStrokes() {
-		InputMap imap = _gamePanel.getInputMap(JComponent.WHEN_IN_FOCUSED_WINDOW);
-		ActionMap amap = _gamePanel.getActionMap();
-
-		Controller actionUp = new Controller("UP", this);
-		Controller actionDown = new Controller("DOWN", this);
-		Controller actionRight = new Controller("RIGHT", this);
-		Controller actionLeft = new Controller("LEFT", this);
-
-		imap.put(KeyStroke.getKeyStroke("UP"), actionUp);
-		amap.put(actionUp, actionUp);
-		imap.put(KeyStroke.getKeyStroke('k'), actionUp);
-		amap.put(actionUp, actionUp);
-		imap.put(KeyStroke.getKeyStroke("DOWN"), actionDown);
-		amap.put(actionDown, actionDown);
-		imap.put(KeyStroke.getKeyStroke('j'), actionDown);
-		amap.put(actionDown, actionDown);
-		imap.put(KeyStroke.getKeyStroke("RIGHT"), actionRight);
-		amap.put(actionRight, actionRight);
-		imap.put(KeyStroke.getKeyStroke('l'), actionRight);
-		amap.put(actionRight, actionRight);
-		imap.put(KeyStroke.getKeyStroke("LEFT"), actionLeft);
-		amap.put(actionLeft, actionLeft);
-		imap.put(KeyStroke.getKeyStroke('h'), actionLeft);
-		amap.put(actionLeft, actionLeft);
-	}
-
 	public void paint(Graphics g){
 		super.paint(g);
 		System.out.println("paint");

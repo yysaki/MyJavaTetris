@@ -1,27 +1,21 @@
 package myJavaTetris.yysaki.com;
 
 import java.awt.event.ActionEvent;
-import javax.swing.AbstractAction;
 
-import myJavaTetris.yysaki.com.View;
+import myJavaTetris.yysaki.com.Colleague;
+import myJavaTetris.yysaki.com.Model;
 
 /**
  * キー入力によるイベント操作の管理
+ * Colleagueの具象クラス
  * @author yysaki
  *
  */
 @SuppressWarnings("serial")
-class Controller extends AbstractAction {
-	private View _v;
-
-	/**
-	 * アクション時の移動方向
-	 */
+class Controller extends Colleague {
+	/** アクション時の移動方向 */
 	private final Point _dir;
-
-	/**
-	 * アクション時の回転方向(0の時回転しない)
-	 */
+	/** アクション時の回転方向(0の時回転しない) */
 	private final int _rotate;
 
 	/**
@@ -30,8 +24,8 @@ class Controller extends AbstractAction {
 	 */
 	private final String _key;
 
-	public Controller(String key, View v){
-		this._v = v;
+	public Controller(String key, Model m){
+		super(m);
 		this._key = key;
 		if(key=="UP"){
 			_dir = new Point(0,0);
@@ -52,33 +46,10 @@ class Controller extends AbstractAction {
 	 * キー入力によりアクティブブロックを操作する
 	 */
 	public void actionPerformed(ActionEvent e){
-		System.out.println(_key);
-
-		if(isMovable()){
-			final GameBlocks b = _v.getGamePanel().getBlocks();
-			b.setDir(new Point(b.getDir().getX()+_dir.getX(), b.getDir().getY()+_dir.getY()));
-			b.setRotate((b.getRotate() + _rotate) % b.getRotatable());
-			_v.repaint();
-		}else if(_key=="DOWN" || _key=="tick"){
-			_v.getGamePanel().next();
-		}
+		Changed();		
 	}
 
-	/**
-	 * キー入力方向にブロックが移動可能かどうか調べる
-	 * 
-	 * @return
-	 */
-	private Boolean isMovable(){
-		GameBlocks next = new GameBlocks(_v.getGamePanel().getBlocks());
-		next.setDir(new Point(next.getDir().getX() + _dir.getX(), next.getDir().getY() + _dir.getY()));
-		next.setRotate(next.getRotate() + _rotate);
-		
-		if(_v.getGamePanel().getField().canBeSetBlocks(next)){
-			return true;
-		}else{
-			return false;
-		}
-
-	}
+	public String getKey(){ return _key; }
+	public Point getDir(){ return _dir; }
+	public int getRotate(){ return _rotate; }
 }
