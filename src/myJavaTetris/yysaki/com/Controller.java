@@ -19,7 +19,7 @@ class Controller extends Colleague {
 	private final int _rotate;
 
 	/**
-	 * イベント識別子
+	 * キー入力識別子
 	 * "UP", "DOWN", "RIGHT", "LEFT", "ENTER"
 	 */
 	private final String _key;

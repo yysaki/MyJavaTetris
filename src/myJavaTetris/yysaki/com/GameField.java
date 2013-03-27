@@ -8,17 +8,17 @@ import myJavaTetris.yysaki.com.GameBlocks;
  *
  */
 public class GameField {
-	private final static int EMPTY = 0;
-	private final static int GAMEOVER = 1;
-	private final static int WALL = 7;
+	private static final int EMPTY = 0;
+	private static final int GAMEOVER = 1;
+	private static final int WALL = 7;
 
 	private final int _width, _height;
 	/** フィールドの堆積状況 */
 	private int[][] _statuses;
 
-	public GameField(int w, int h){
-		_width = w; _height = h;
-		_statuses = new int[w+1][h+1];
+	public GameField(int blockWidth, int blockHeight){
+		_width = blockWidth; _height = blockHeight;
+		_statuses = new int[blockWidth+1][blockHeight+1];
 
 		resetStatuses();
 	}

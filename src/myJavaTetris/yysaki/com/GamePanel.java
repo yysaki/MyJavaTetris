@@ -14,8 +14,6 @@ import myJavaTetris.yysaki.com.View;
  */
 @SuppressWarnings("serial")
 public class GamePanel extends JPanel{
-	private View _view;
-	private Model _model;
 	private GameBlocks _blocks;
 	private GameField _field;
 
@@ -23,15 +21,13 @@ public class GamePanel extends JPanel{
 	private final static int _blocksize = 25; // 正方形ブロックの辺の長さ
 	private Image[] _icon; // gray, red, yellow, purple, green, blue, orange, water
 
-	public GamePanel(View v, Model m, int w, int h) {
+	public GamePanel(int blockWidth, int blockHeight) {
 		super();
 		System.out.println("GamePanel Constructor");
 
-		this._view = v;
-		this._model = m;
-		_start = new Point(w/2, 0);
+		_start = new Point(blockWidth/2, 0);
 
-		setField(new GameField(w, h));
+		setField(new GameField(blockWidth, blockHeight));
 		setBlocks(new GameBlocks(getField().getEmptyColor()));
 
 		/* panel size */

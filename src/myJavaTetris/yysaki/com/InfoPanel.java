@@ -1,11 +1,8 @@
 package myJavaTetris.yysaki.com;
 
 import java.awt.*;
-
 import javax.swing.*;
 
-import myJavaTetris.yysaki.com.Model;
-import myJavaTetris.yysaki.com.View;
 import javax.swing.JPanel;
 
 /**
@@ -13,10 +10,8 @@ import javax.swing.JPanel;
  * @author yysaki
  *
  */
+@SuppressWarnings("serial")
 public class InfoPanel extends JPanel {
-	private Model _model;
-	private View _view;
-
 	private JLabel _status;
 	private JLabel _hiscore;
 	private JLabel _score;
@@ -25,13 +20,19 @@ public class InfoPanel extends JPanel {
 	private static final String MASSAGE[] = {"READY: PRESS 'ENTER' KEY", "NOW PLAYING", 
 			"GAMEOVER: PRESS 'ENTER' KEY"};
 
-	public InfoPanel(View v, Model m, int w, int h){
+	/**
+	 * スコアやキー操作方法を表示するパネル
+	 * GamePanelのパネルサイズをコピーする
+	 * 
+	 * @param width パネルの幅
+	 * @param height パネルの高さ
+	 */
+	public InfoPanel(int width, int height){
 		super();
-		_view = v;
-		_model = m;
-		int width = _view.getGamePanel().getPanelWidth();
-		int height = _view.getGamePanel().getPanelHeight();
 		int labelWidth = width - 30;
+		
+		System.out.println("width:" + width);
+		System.out.println("height:" + height);		
 		
 		setPreferredSize(new Dimension(width, height));
 		setLayout(new FlowLayout());

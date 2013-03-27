@@ -19,16 +19,16 @@ public class View extends JFrame {
 	private Model _model;
 
 	/**
-	 * @param w GamePanelの幅毎のブロック数
-	 * @param h GamePanelの高さ毎のブロック数
+	 * @param width GamePanelの幅毎のブロック数
+	 * @param height GamePanelの高さ毎のブロック数
 	 */
-	View(int w, int h){
+	View(int width, int height){
 		System.out.println("View constructor");
 
 		/* set Frame */
 		_model = new Model(this);
-		_gamePanel = new GamePanel(this, _model, w, h);
-		_infoPanel = new InfoPanel(this, _model, w, h);
+		_gamePanel = new GamePanel(width, height);
+		_infoPanel = new InfoPanel(_gamePanel.getPanelWidth(), _gamePanel.getPanelHeight());
 		getContentPane().setLayout(new GridLayout(1,2));
 		getContentPane().add(_gamePanel);
 		getContentPane().add(_infoPanel);

@@ -7,7 +7,7 @@ import javax.swing.KeyStroke;
 import javax.swing.Timer;
 
 import myJavaTetris.yysaki.com.View;
-import myJavaTetris.yysaki.com.GameTimer;
+import myJavaTetris.yysaki.com.Tick;
 import myJavaTetris.yysaki.com.GameField;
 import myJavaTetris.yysaki.com.GameBlocks;
 import myJavaTetris.yysaki.com.GamePanel;
@@ -25,7 +25,7 @@ public class Model {
 
 	private Timer _timer;
 	/** Colleagueインスタンス衆 */
-	private GameTimer _gameTimer;
+	private Tick _tick;
 	private Controller _actionEnter;
 	private Controller _actionUp;
 	private Controller _actionDown;
@@ -34,9 +34,9 @@ public class Model {
 
 	/* Gameの状態 */
 	private int _type;
-	static final int READY = 0;
-	static final int PLAYING = 1;
-	static final int END = 2;
+	private static final int READY = 0;
+	private static final int PLAYING = 1;
+	private static final int END = 2;
 	
 	/* ゲームスコア */
 	private int _hiscore;
@@ -44,15 +44,15 @@ public class Model {
 	private int _lines;
 
 	/** tickの周期 */
-	static final int INTERVAL = 1000;
+	private static final int INTERVAL = 1000;
 	
-	public Model(View arg){
-		_view = arg;
+	public Model(View v){
+		_view = v;
 		_type = READY;
 
 		/* Tick */
-		_gameTimer = new GameTimer(_view, this);
-		_timer = new Timer(INTERVAL, _gameTimer);
+		_tick = new Tick(this);
+		_timer = new Timer(INTERVAL, _tick);
 		
 		_score = 0;
 		_lines = 0;
@@ -95,7 +95,7 @@ public class Model {
 	/**
 	 * 地面に設置した時、新しいテトリスブロックを出現させる
 	 */
-	private void next(){
+	private void droped(){
 		System.out.println("next");
 
 		GamePanel gp = _view.getGamePanel();
@@ -199,8 +199,8 @@ public class Model {
 				b.setDir(new Point(b.getDir().getX()+c.getDir().getX(), b.getDir().getY()+c.getDir().getY()));
 				b.setRotate((b.getRotate() + c.getRotate()) % b.getRotatable());
 				_view.repaint();
-			}else if(_actionDown.equals(c) || _gameTimer.equals(c)){
-				next();
+			}else if(_actionDown.equals(c) || _tick.equals(c)){
+				droped();
 			}
 		}
 	}

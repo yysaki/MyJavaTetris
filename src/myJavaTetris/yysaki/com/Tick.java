@@ -12,13 +12,13 @@ import myJavaTetris.yysaki.com.Colleague;
  *
  */
 @SuppressWarnings("serial")
-class GameTimer extends Colleague {
+class Tick extends Colleague {
 	/** アクション時の移動方向 */
 	private final Point _dir;
 	/**　アクション時の回転方向(0の時回転しない) */
 	private final int _rotate;
 
-	public GameTimer(View v, Model m){
+	public Tick(Model m){
 		super(m);
 		_dir = new Point(0,1);
 		_rotate = 0;
