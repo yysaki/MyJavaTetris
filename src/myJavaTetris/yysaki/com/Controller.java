@@ -20,12 +20,13 @@ class Controller extends Colleague {
 
 	/**
 	 * イベント識別子
-	 * "UP", "DOWN", "RIGHT", "LEFT"
+	 * "UP", "DOWN", "RIGHT", "LEFT", "ENTER"
 	 */
 	private final String _key;
 
 	public Controller(String key, Model m){
 		super(m);
+
 		this._key = key;
 		if(key=="UP"){
 			_dir = new Point(0,0);
@@ -36,8 +37,11 @@ class Controller extends Colleague {
 		}else if(key=="RIGHT"){
 			_dir = new Point(1,0);
 			_rotate = 0;
-		}else{ // if(key=="LEFT"){
+		}else if(key=="LEFT"){
 			_dir = new Point(-1,0);
+			_rotate = 0;
+		}else{ // dummy
+			_dir = new Point();
 			_rotate = 0;
 		}
 	}
