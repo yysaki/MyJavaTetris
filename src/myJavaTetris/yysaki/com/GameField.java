@@ -8,34 +8,35 @@ import myJavaTetris.yysaki.com.GameBlocks;
  *
  */
 public class GameField {
-	private final static int _empty = 0;
-	private final static int _wall = 7;
-	
+	private final static int EMPTY = 0;
+	private final static int GAMEOVER = 1;
+	private final static int WALL = 7;
+
 	private final int _width, _height;
 	/** フィールドの堆積状況 */
 	private int[][] _statuses;
-	
+
 	public GameField(int w, int h){
 		_width = w; _height = h;
 		_statuses = new int[w+1][h+1];
-		
+
 		resetStatuses();
 	}
-	
+
 	private void resetStatuses(){
 		for(int i=0;i<_statuses.length;i++){
 			for(int j=0;j<_statuses[0].length;j++){
-				_statuses[i][j] = _empty;
+				_statuses[i][j] = EMPTY;
 			}
 		}
 		for(int i=0;i<_statuses.length;i++){
-			_statuses[i][_statuses[0].length-1] = _wall;
+			_statuses[i][_statuses[0].length-1] = WALL;
 		}
 		for(int j=0;j<_statuses[0].length;j++){
-			_statuses[_statuses.length-1][j] = _wall;
+			_statuses[_statuses.length-1][j] = WALL;
 		}		
 	}
-	
+
 	public void setAll(int id){
 		for(int i=0;i<_width;i++){
 			for(int j=0;j<_height;j++){
@@ -43,9 +44,9 @@ public class GameField {
 			}
 		}
 	}
-	
+
 	/**
- 	 * statusesにblocksを描画する
+	 * statusesにblocksを描画する
 	 * 空で無い地点に積もうとした時falseを返す
 
 	 * @param b
@@ -57,18 +58,21 @@ public class GameField {
 			final Point p = b.getPoints()[i];
 			final int x = b.getDir().getX() + p.getX() * (int)Math.cos((b.getRotate())*Math.PI/2) + p.getY() * (int)Math.sin((b.getRotate())*Math.PI/2);
 			final int y = b.getDir().getY() + -1 * p.getX() * (int)Math.sin((b.getRotate())*Math.PI/2) + p.getY() * (int)Math.cos((b.getRotate())*Math.PI/2);
-			if(_statuses[x][y]!=_empty){
+			if(_statuses[x][y]!=EMPTY){
 				ret = false;
 			}
 			_statuses[x][y] = b.getColor();
 		}
-		
+
 		return ret;
 	}
-	
+
+	/**
+	 * 現状態から可能な限りブロック行を削除する
+	 */
 	public void deleteLines(){
 		int deletableY = hasDeletable();
-		
+
 		while(deletableY>=0){
 			for(int j=deletableY;j>=0;j--){
 				for(int i=0;i<_width;i++){
@@ -79,7 +83,7 @@ public class GameField {
 					}
 				}
 			}
-			
+
 			deletableY = hasDeletable();
 		}
 	}
@@ -102,11 +106,11 @@ public class GameField {
 				return j;
 			}
 		}
-		
+
 		// field doesn't have deletable line
 		return -1;
 	}
-	
+
 	/**
 	 * フィールドに指定されたブロックを配置出来るか調べる
 	 * @param b
@@ -127,8 +131,11 @@ public class GameField {
 		}
 		return true;
 	}
-	
+
 	public int getStatus(int x, int y){ return _statuses[x][y]; }
 	public int getWidth(){ return _width; }
 	public int getHeight(){ return _height; }
+	
+	public int getEmptyColor(){ return EMPTY; }
+	public int getGameOverColor(){ return GAMEOVER; }
 }

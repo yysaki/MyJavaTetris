@@ -10,6 +10,7 @@ import myJavaTetris.yysaki.com.View;
 import myJavaTetris.yysaki.com.GameTimer;
 import myJavaTetris.yysaki.com.GameField;
 import myJavaTetris.yysaki.com.GameBlocks;
+import myJavaTetris.yysaki.com.GamePanel;
 import myJavaTetris.yysaki.com.Colleague;
 
 
@@ -86,7 +87,7 @@ public class Model {
 	/**
 	 * 地面に設置した時、新しいテトリスブロックを出現させる
 	 */
-	public void next(){
+	private void next(){
 		System.out.println("next");
 
 		GamePanel gp = _view.getGamePanel();
@@ -113,7 +114,7 @@ public class Model {
 			_type = END;
 			_timer.stop();
 
-			gp.getField().setAll(1);
+			gp.getField().setAll(gp.getField().getGameOverColor());
 
 			gp.setBlocks(new GameBlocks(gp.getStartPoint(),0,1)); // バッドノウハウ アクティブブロックをGameOver色背景に埋める
 			gp.repaint();
@@ -133,23 +134,35 @@ public class Model {
 		}else{
 			return false;
 		}
-
 	}
 
 	public void ColleagueChanged(Colleague c){
 		System.out.println("call from " + c.getKey());
+		final GamePanel gp = _view.getGamePanel();
+		final GameBlocks b = _view.getGamePanel().getBlocks();
 
 		if(_actionEnter.equals(c)){
 			/* TODO GameModeの変更 */
 			switch(_type){
 			case READY:
+				/* START動作 */
 				_type = PLAYING;
+				gp.getField().setAll(gp.getField().getEmptyColor());
+				gp.setBlocks(new GameBlocks(gp.getStartPoint(), 0));
+
+				_view.repaint();
 				_timer.start();
 				break;
 			case PLAYING:
 				break;
 			case END:
-				/* TODO PLAYINGに戻りたい */
+				/* TODO replay動作 */
+				_type = PLAYING;				
+				gp.getField().setAll(gp.getField().getEmptyColor());
+				gp.setBlocks(new GameBlocks(gp.getStartPoint(), 0));
+
+				_view.repaint();
+				_timer.start();
 				break;
 			default:
 				break;
@@ -160,12 +173,11 @@ public class Model {
 
 		if(_type == PLAYING){
 			if(isMovable(c.getDir(), c.getRotate())){
-				final GameBlocks b = _view.getGamePanel().getBlocks();
 				b.setDir(new Point(b.getDir().getX()+c.getDir().getX(), b.getDir().getY()+c.getDir().getY()));
 				b.setRotate((b.getRotate() + c.getRotate()) % b.getRotatable());
 				_view.repaint();
 			}else if(_actionDown.equals(c) || _gameTimer.equals(c)){
-				_view.getGamePanel().next();
+				next();
 			}
 		}
 	}

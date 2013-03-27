@@ -30,7 +30,7 @@ public class GamePanel extends JPanel{
 		this._view = v;
 		this._model = m;
 		_start = new Point(w/2, 0);
-		setBlocks(new GameBlocks(_start, 0));
+
 		setField(new GameField(w, h));
 		
 		/* panel size */
@@ -54,14 +54,6 @@ public class GamePanel extends JPanel{
 		drawBG(g);
 		drawBlocks(g); // アクティブブロックの描画
 	}
-
-	/**
-	 * 地面に設置した時、新しいテトリスブロックを出現させる
-	 */
-	public void next(){
-		_model.next();
-	}
-
 	
 	/**
 	 * draw piled blocks
