@@ -18,16 +18,9 @@ class Controller extends Colleague {
 	/** アクション時の回転方向(0の時回転しない) */
 	private final int _rotate;
 
-	/**
-	 * イベント識別子
-	 * "UP", "DOWN", "RIGHT", "LEFT", "ENTER"
-	 */
-	private final String _key;
-
 	public Controller(String key, Model m){
 		super(m);
 
-		this._key = key;
 		if(key=="UP"){
 			_dir = new Point(0,0);
 			_rotate = 1;
@@ -53,7 +46,6 @@ class Controller extends Colleague {
 		Changed();		
 	}
 
-	public String getKey(){ return _key; }
 	public Point getDir(){ return _dir; }
 	public int getRotate(){ return _rotate; }
 }

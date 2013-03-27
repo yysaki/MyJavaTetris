@@ -27,8 +27,6 @@ public abstract class Colleague extends AbstractAction {
 	@Override
 	abstract public void actionPerformed(ActionEvent arg0);
 
-	/** イベント識別子 */
-	abstract public String getKey();
 	/** アクション時の移動方向 */
 	abstract public Point getDir();
 	/** アクション時の回転方向(0の時回転しない) */

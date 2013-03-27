@@ -14,8 +14,6 @@ import myJavaTetris.yysaki.com.View;
  */
 @SuppressWarnings("serial")
 public class GamePanel extends JPanel{
-	private View _view;
-	private Model _model;
 	private GameBlocks _blocks;
 	private GameField _field;
 
@@ -23,15 +21,12 @@ public class GamePanel extends JPanel{
 	private final static int _blocksize = 25; // 正方形ブロックの辺の長さ
 	private Image[] _icon; // gray, red, yellow, purple, green, blue, orange, water
 
-	public GamePanel(View v, Model m, int w, int h) {
+	public GamePanel(int blockWidth, int blockHeight) {
 		super();
-		System.out.println("GamePanel Constructor");
 
-		this._view = v;
-		this._model = m;
-		_start = new Point(w/2, 0);
+		_start = new Point(blockWidth/2, 0);
 
-		setField(new GameField(w, h));
+		setField(new GameField(blockWidth, blockHeight));
 		setBlocks(new GameBlocks(getField().getEmptyColor()));
 
 		/* panel size */
@@ -50,7 +45,6 @@ public class GamePanel extends JPanel{
 	}
 
 	public void paintComponent(Graphics g){
-		//		System.out.println("GamePanel.paintComponent");
 		super.paintComponent(g);
 		drawBG(g);
 		drawBlocks(g); // アクティブブロックの描画
@@ -79,14 +73,11 @@ public class GamePanel extends JPanel{
 					+ -1 * p.getX() * (int)Math.sin(b.getRotate()*Math.PI/2) 
 					+ p.getY() * (int)Math.cos(b.getRotate()*Math.PI/2);
 
-			//			System.out.println("x: " +  x + ", y:" + y);
 			drawBlock(g, b.getColor(), dx, dy);
 		}
 	}
 
 	private void drawBlock(Graphics g, int color, int x, int y){
-		//			System.out.println("drawBlock color:" + color + ", x:" + x + ", y:" + y);
-		//		System.out.println("drawBlock color:" + color);
 		g.drawImage(_icon[color], x*_blocksize, y*_blocksize, this);		
 	}
 

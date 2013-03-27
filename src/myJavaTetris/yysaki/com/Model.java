@@ -7,7 +7,7 @@ import javax.swing.KeyStroke;
 import javax.swing.Timer;
 
 import myJavaTetris.yysaki.com.View;
-import myJavaTetris.yysaki.com.GameTimer;
+import myJavaTetris.yysaki.com.Tick;
 import myJavaTetris.yysaki.com.GameField;
 import myJavaTetris.yysaki.com.GameBlocks;
 import myJavaTetris.yysaki.com.GamePanel;
@@ -25,7 +25,7 @@ public class Model {
 
 	private Timer _timer;
 	/** Colleagueインスタンス衆 */
-	private GameTimer _gameTimer;
+	private Tick _tick;
 	private Controller _actionEnter;
 	private Controller _actionUp;
 	private Controller _actionDown;
@@ -34,9 +34,9 @@ public class Model {
 
 	/* Gameの状態 */
 	private int _type;
-	static final int READY = 0;
-	static final int PLAYING = 1;
-	static final int END = 2;
+	private static final int READY = 0;
+	private static final int PLAYING = 1;
+	private static final int END = 2;
 	
 	/* ゲームスコア */
 	private int _hiscore;
@@ -44,15 +44,15 @@ public class Model {
 	private int _lines;
 
 	/** tickの周期 */
-	static final int INTERVAL = 1000;
+	private static final int INTERVAL = 1000;
 	
-	public Model(View arg){
-		_view = arg;
+	public Model(View v){
+		_view = v;
 		_type = READY;
 
 		/* Tick */
-		_gameTimer = new GameTimer(_view, this);
-		_timer = new Timer(INTERVAL, _gameTimer);
+		_tick = new Tick(this);
+		_timer = new Timer(INTERVAL, _tick);
 		
 		_score = 0;
 		_lines = 0;
@@ -94,37 +94,28 @@ public class Model {
 
 	/**
 	 * 地面に設置した時、新しいテトリスブロックを出現させる
+	 * 出現出来ない場合GameOverと判定
 	 */
-	private void next(){
-		System.out.println("next");
+	private void droped(){
+		if(_type != PLAYING){ return; }
 
 		GamePanel gp = _view.getGamePanel();
-
-		if(_type == END){
-			return;
-		}
-
-		Boolean pileSucceeded = gp.getField().pileBlocks(gp.getBlocks());
-		if(!pileSucceeded){
-			System.out.println("pile is failed");
-		}
+		gp.getField().pileBlocks(gp.getBlocks());
 
 		int num = gp.getField().deleteLines();
-		
-		_score += num * num;
-		_view.getInfoPanel().setScore(Integer.toString(_score));
-		_hiscore = Math.max(_hiscore, _score);
-		_view.getInfoPanel().setHiscore(Integer.toString(_hiscore));		
-		_lines += num;
-		_view.getInfoPanel().setLines(Integer.toString(_lines));
 
-		gp.repaint();
+		_score += num * num;
+		_hiscore = Math.max(_hiscore, _score);
+		_lines += num;
+		setScoreLabels();
+		
+		_view.repaint();
 
 		// setNextBlocks
 		gp.setBlocks(new GameBlocks(gp.getStartPoint(), 0));
 
 		// set blocks & check game over
-		if(!gp.getField().canBeSetBlocks(gp.getBlocks())){
+		if(!gp.getField().canSetBlocks(gp.getBlocks())){
 			_type = END;
 			_view.getInfoPanel().setStatus(_type);
 
@@ -132,8 +123,8 @@ public class Model {
 
 			gp.getField().setAll(gp.getField().getGameOverColor());
 
-			gp.setBlocks(new GameBlocks(gp.getStartPoint(),0,1)); // バッドノウハウ アクティブブロックをGameOver色背景に埋める
-			gp.repaint();
+			gp.setBlocks(new GameBlocks(gp.getStartPoint(),0,1));
+			_view.repaint();
 		}
 	}
 
@@ -145,7 +136,7 @@ public class Model {
 		next.setDir(new Point(next.getDir().getX() + dir.getX(), next.getDir().getY() + dir.getY()));
 		next.setRotate(next.getRotate() + rotate);
 
-		if(_view.getGamePanel().getField().canBeSetBlocks(next)){
+		if(_view.getGamePanel().getField().canSetBlocks(next)){
 			return true;
 		}else{
 			return false;
@@ -153,12 +144,9 @@ public class Model {
 	}
 
 	public void ColleagueChanged(Colleague c){
-		System.out.println("call from " + c.getKey());
 		final GamePanel gp = _view.getGamePanel();
-		final GameBlocks b = _view.getGamePanel().getBlocks();
 
 		if(_actionEnter.equals(c)){
-			/* TODO GameModeの変更 */
 			switch(_type){
 			case READY:
 				/* START動作 */
@@ -180,9 +168,8 @@ public class Model {
 				gp.setBlocks(new GameBlocks(gp.getStartPoint(), 0));
 				
 				_score = 0;
-				_view.getInfoPanel().setScore(Integer.toString(_score));
 				_lines = 0;
-				_view.getInfoPanel().setLines(Integer.toString(_lines));
+				setScoreLabels();
 
 				_view.repaint();
 				_timer.start();
@@ -196,12 +183,20 @@ public class Model {
 
 		if(_type == PLAYING){
 			if(isMovable(c.getDir(), c.getRotate())){
+				final GameBlocks b = _view.getGamePanel().getBlocks();
+
 				b.setDir(new Point(b.getDir().getX()+c.getDir().getX(), b.getDir().getY()+c.getDir().getY()));
 				b.setRotate((b.getRotate() + c.getRotate()) % b.getRotatable());
 				_view.repaint();
-			}else if(_actionDown.equals(c) || _gameTimer.equals(c)){
-				next();
+			}else if(_actionDown.equals(c) || _tick.equals(c)){
+				droped();
 			}
 		}
+	}
+	
+	private void setScoreLabels(){
+		_view.getInfoPanel().setScore(Integer.toString(_score));
+		_view.getInfoPanel().setHiscore(Integer.toString(_hiscore));		
+		_view.getInfoPanel().setLines(Integer.toString(_lines));
 	}
 }

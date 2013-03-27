@@ -8,17 +8,17 @@ import myJavaTetris.yysaki.com.GameBlocks;
  *
  */
 public class GameField {
-	private final static int EMPTY = 0;
-	private final static int GAMEOVER = 1;
-	private final static int WALL = 7;
+	private static final int EMPTY = 0;
+	private static final int GAMEOVER = 1;
+	private static final int WALL = 7;
 
 	private final int _width, _height;
 	/** フィールドの堆積状況 */
 	private int[][] _statuses;
 
-	public GameField(int w, int h){
-		_width = w; _height = h;
-		_statuses = new int[w+1][h+1];
+	public GameField(int blockWidth, int blockHeight){
+		_width = blockWidth; _height = blockHeight;
+		_statuses = new int[blockWidth+1][blockHeight+1];
 
 		resetStatuses();
 	}
@@ -120,7 +120,7 @@ public class GameField {
 	 * @param b
 	 * @return フィールドに配置出来るか
 	 */
-	public Boolean canBeSetBlocks(GameBlocks b){
+	public Boolean canSetBlocks(GameBlocks b){
 		for(int i=0;i<b.getPoints().length;i++){
 			final Point p = b.getPoints()[i];
 			final int x = b.getDir().getX() + p.getX() * (int)Math.cos((b.getRotate())*Math.PI/2) + p.getY() * (int)Math.sin((b.getRotate())*Math.PI/2);
