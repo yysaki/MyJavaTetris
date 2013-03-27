@@ -18,6 +18,20 @@ public class GameBlocks {
 	private int _rotate;
 
 	/**
+	 * Nullオブジェクトとして壁と同じ色のブロックを生成する
+	 */
+	public GameBlocks(int color){
+		_color = color;
+		_rotatable = 0;
+		_points = new Point[4];
+		for(int i = 0; i < 4; i++){
+			_points[i] = new Point();
+		}
+		_dir = new Point();
+		_rotate = 0;
+	}
+
+	/**
 	 *  idをランダム生成したテトリスブロック
 	 * @param dir
 	 * @param rotate
@@ -33,6 +47,7 @@ public class GameBlocks {
 	public GameBlocks(GameBlocks b){
 		this(b.getDir(), b.getRotate(), b.getColor());
 	}
+	
 
 	/**
 	 * 1<=id<=8
@@ -50,6 +65,7 @@ public class GameBlocks {
 
 		_color = id;
 		_points = new Point[4];
+		_dir = dir;
 
 		switch(id){
 		case 1: // 棒形
@@ -103,9 +119,7 @@ public class GameBlocks {
 			break;
 		}
 		
-		this._rotate = rotate % _rotatable;
-		this._dir = dir;
-
+		_rotate = rotate % _rotatable;
 	}
 
 	public int getColor()    { return _color; }

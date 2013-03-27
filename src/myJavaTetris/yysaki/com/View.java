@@ -5,7 +5,6 @@ import java.awt.*;
 import java.awt.event.*;
 
 import myJavaTetris.yysaki.com.GamePanel;
-import myJavaTetris.yysaki.com.Controller;
 import myJavaTetris.yysaki.com.Model;
 
 /**
@@ -15,7 +14,8 @@ import myJavaTetris.yysaki.com.Model;
  */
 @SuppressWarnings("serial")
 public class View extends JFrame {
-	private GamePanel _gamePanel; 
+	private GamePanel _gamePanel;
+	private InfoPanel _infoPanel;
 	private Model _model;
 
 	/**
@@ -28,7 +28,10 @@ public class View extends JFrame {
 		/* set Frame */
 		_model = new Model(this);
 		_gamePanel = new GamePanel(this, _model, w, h);
+		_infoPanel = new InfoPanel(this, _model, w, h);
+		getContentPane().setLayout(new GridLayout(1,2));
 		getContentPane().add(_gamePanel);
+//		getContentPane().add(_infoPanel);
 		pack();
 		setResizable(false);
 		addWindowListener(new WindowAdapter() {
@@ -49,4 +52,5 @@ public class View extends JFrame {
 	}
 	
 	public GamePanel getGamePanel(){ return _gamePanel; }
+	public InfoPanel getInfoPanel(){ return _infoPanel; }
 }
