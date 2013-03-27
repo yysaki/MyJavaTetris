@@ -31,7 +31,7 @@ public class View extends JFrame {
 		_infoPanel = new InfoPanel(this, _model, w, h);
 		getContentPane().setLayout(new GridLayout(1,2));
 		getContentPane().add(_gamePanel);
-//		getContentPane().add(_infoPanel);
+		getContentPane().add(_infoPanel);
 		pack();
 		setResizable(false);
 		addWindowListener(new WindowAdapter() {

@@ -70,10 +70,12 @@ public class GameField {
 	/**
 	 * 現状態から可能な限りブロック行を削除する
 	 */
-	public void deleteLines(){
+	public int deleteLines(){
 		int deletableY = hasDeletable();
+		int count = 0;
 
 		while(deletableY>=0){
+			count++;
 			for(int j=deletableY;j>=0;j--){
 				for(int i=0;i<_width;i++){
 					if(j!=0){
@@ -86,6 +88,8 @@ public class GameField {
 
 			deletableY = hasDeletable();
 		}
+		
+		return count;
 	}
 
 	/**

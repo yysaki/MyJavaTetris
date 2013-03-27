@@ -32,11 +32,16 @@ public class Model {
 	private Controller _actionLeft;
 	private Controller _actionRight;
 
-	/** Gameのステータス */
+	/* Gameの状態 */
 	private int _type;
 	static final int READY = 0;
 	static final int PLAYING = 1;
 	static final int END = 2;
+	
+	/* ゲームスコア */
+	private int _hiscore;
+	private int _score;
+	private int _lines;
 
 	/** tickの周期 */
 	static final int INTERVAL = 1000;
@@ -48,6 +53,9 @@ public class Model {
 		/* Tick */
 		_gameTimer = new GameTimer(_view, this);
 		_timer = new Timer(INTERVAL, _gameTimer);
+		
+		_score = 0;
+		_lines = 0;
 	}
 
 	/**
@@ -101,7 +109,14 @@ public class Model {
 			System.out.println("pile is failed");
 		}
 
-		gp.getField().deleteLines();
+		int num = gp.getField().deleteLines();
+		
+		_score += num * num;
+		_view.getInfoPanel().setScore(Integer.toString(_score));
+		_hiscore = Math.max(_hiscore, _score);
+		_view.getInfoPanel().setHiscore(Integer.toString(_hiscore));		
+		_lines += num;
+		_view.getInfoPanel().setLines(Integer.toString(_lines));
 
 		gp.repaint();
 
@@ -110,8 +125,9 @@ public class Model {
 
 		// set blocks & check game over
 		if(!gp.getField().canBeSetBlocks(gp.getBlocks())){
-			System.out.println("Game Over!!!");
 			_type = END;
+			_view.getInfoPanel().setStatus(_type);
+
 			_timer.stop();
 
 			gp.getField().setAll(gp.getField().getGameOverColor());
@@ -147,6 +163,7 @@ public class Model {
 			case READY:
 				/* START動作 */
 				_type = PLAYING;
+				_view.getInfoPanel().setStatus(_type);
 				gp.getField().setAll(gp.getField().getEmptyColor());
 				gp.setBlocks(new GameBlocks(gp.getStartPoint(), 0));
 
@@ -156,10 +173,16 @@ public class Model {
 			case PLAYING:
 				break;
 			case END:
-				/* TODO replay動作 */
-				_type = PLAYING;				
+				/* replay動作 */
+				_type = PLAYING;
+				_view.getInfoPanel().setStatus(_type);
 				gp.getField().setAll(gp.getField().getEmptyColor());
 				gp.setBlocks(new GameBlocks(gp.getStartPoint(), 0));
+				
+				_score = 0;
+				_view.getInfoPanel().setScore(Integer.toString(_score));
+				_lines = 0;
+				_view.getInfoPanel().setLines(Integer.toString(_lines));
 
 				_view.repaint();
 				_timer.start();
