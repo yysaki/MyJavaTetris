@@ -77,13 +77,13 @@ public class GameFieldTest extends ProjectTests {
 		int w = 10; int h = 20;
 		GameField f = new GameField(w,h);
 		GameBlocks b = new GameBlocks(new Point(1,0), 0, 1);
-		assertTrue(f.canBeSetBlocks(b));
+		assertTrue(f.canSetBlocks(b));
 		b = new GameBlocks(new Point(w-3,0), 0, 1);
-		assertTrue(f.canBeSetBlocks(b));
+		assertTrue(f.canSetBlocks(b));
 		b = new GameBlocks(new Point(w-2,0), 0, 1);
-		assertFalse(f.canBeSetBlocks(b));
+		assertFalse(f.canSetBlocks(b));
 		b = new GameBlocks(new Point(3,h), 0, 1);
-		assertFalse(f.canBeSetBlocks(b));
+		assertFalse(f.canSetBlocks(b));
 	}
 
 	@Test

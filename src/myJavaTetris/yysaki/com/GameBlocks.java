@@ -61,8 +61,6 @@ public class GameBlocks {
 			id = 1;
 		}
 
-		System.out.println("new Blocks id:" + id);
-
 		_color = id;
 		_points = new Point[4];
 		_dir = dir;

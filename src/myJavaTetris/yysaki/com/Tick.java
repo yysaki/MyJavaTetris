@@ -31,7 +31,6 @@ class Tick extends Colleague {
 		Changed();
 	}
 	
-	public String getKey(){ return "tick"; }
 	public Point getDir(){ return _dir; }
 	public int getRotate(){ return _rotate; }
 }

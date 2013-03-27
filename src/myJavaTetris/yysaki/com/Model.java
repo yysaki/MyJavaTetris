@@ -94,37 +94,28 @@ public class Model {
 
 	/**
 	 * 地面に設置した時、新しいテトリスブロックを出現させる
+	 * 出現出来ない場合GameOverと判定
 	 */
 	private void droped(){
-		System.out.println("next");
+		if(_type != PLAYING){ return; }
 
 		GamePanel gp = _view.getGamePanel();
-
-		if(_type == END){
-			return;
-		}
-
-		Boolean pileSucceeded = gp.getField().pileBlocks(gp.getBlocks());
-		if(!pileSucceeded){
-			System.out.println("pile is failed");
-		}
+		gp.getField().pileBlocks(gp.getBlocks());
 
 		int num = gp.getField().deleteLines();
-		
-		_score += num * num;
-		_view.getInfoPanel().setScore(Integer.toString(_score));
-		_hiscore = Math.max(_hiscore, _score);
-		_view.getInfoPanel().setHiscore(Integer.toString(_hiscore));		
-		_lines += num;
-		_view.getInfoPanel().setLines(Integer.toString(_lines));
 
-		gp.repaint();
+		_score += num * num;
+		_hiscore = Math.max(_hiscore, _score);
+		_lines += num;
+		setScoreLabels();
+		
+		_view.repaint();
 
 		// setNextBlocks
 		gp.setBlocks(new GameBlocks(gp.getStartPoint(), 0));
 
 		// set blocks & check game over
-		if(!gp.getField().canBeSetBlocks(gp.getBlocks())){
+		if(!gp.getField().canSetBlocks(gp.getBlocks())){
 			_type = END;
 			_view.getInfoPanel().setStatus(_type);
 
@@ -132,8 +123,8 @@ public class Model {
 
 			gp.getField().setAll(gp.getField().getGameOverColor());
 
-			gp.setBlocks(new GameBlocks(gp.getStartPoint(),0,1)); // バッドノウハウ アクティブブロックをGameOver色背景に埋める
-			gp.repaint();
+			gp.setBlocks(new GameBlocks(gp.getStartPoint(),0,1));
+			_view.repaint();
 		}
 	}
 
@@ -145,7 +136,7 @@ public class Model {
 		next.setDir(new Point(next.getDir().getX() + dir.getX(), next.getDir().getY() + dir.getY()));
 		next.setRotate(next.getRotate() + rotate);
 
-		if(_view.getGamePanel().getField().canBeSetBlocks(next)){
+		if(_view.getGamePanel().getField().canSetBlocks(next)){
 			return true;
 		}else{
 			return false;
@@ -153,12 +144,9 @@ public class Model {
 	}
 
 	public void ColleagueChanged(Colleague c){
-		System.out.println("call from " + c.getKey());
 		final GamePanel gp = _view.getGamePanel();
-		final GameBlocks b = _view.getGamePanel().getBlocks();
 
 		if(_actionEnter.equals(c)){
-			/* TODO GameModeの変更 */
 			switch(_type){
 			case READY:
 				/* START動作 */
@@ -180,9 +168,8 @@ public class Model {
 				gp.setBlocks(new GameBlocks(gp.getStartPoint(), 0));
 				
 				_score = 0;
-				_view.getInfoPanel().setScore(Integer.toString(_score));
 				_lines = 0;
-				_view.getInfoPanel().setLines(Integer.toString(_lines));
+				setScoreLabels();
 
 				_view.repaint();
 				_timer.start();
@@ -196,6 +183,8 @@ public class Model {
 
 		if(_type == PLAYING){
 			if(isMovable(c.getDir(), c.getRotate())){
+				final GameBlocks b = _view.getGamePanel().getBlocks();
+
 				b.setDir(new Point(b.getDir().getX()+c.getDir().getX(), b.getDir().getY()+c.getDir().getY()));
 				b.setRotate((b.getRotate() + c.getRotate()) % b.getRotatable());
 				_view.repaint();
@@ -203,5 +192,11 @@ public class Model {
 				droped();
 			}
 		}
+	}
+	
+	private void setScoreLabels(){
+		_view.getInfoPanel().setScore(Integer.toString(_score));
+		_view.getInfoPanel().setHiscore(Integer.toString(_hiscore));		
+		_view.getInfoPanel().setLines(Integer.toString(_lines));
 	}
 }

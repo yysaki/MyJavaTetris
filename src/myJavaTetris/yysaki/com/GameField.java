@@ -120,7 +120,7 @@ public class GameField {
 	 * @param b
 	 * @return フィールドに配置出来るか
 	 */
-	public Boolean canBeSetBlocks(GameBlocks b){
+	public Boolean canSetBlocks(GameBlocks b){
 		for(int i=0;i<b.getPoints().length;i++){
 			final Point p = b.getPoints()[i];
 			final int x = b.getDir().getX() + p.getX() * (int)Math.cos((b.getRotate())*Math.PI/2) + p.getY() * (int)Math.sin((b.getRotate())*Math.PI/2);

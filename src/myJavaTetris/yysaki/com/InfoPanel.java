@@ -31,9 +31,6 @@ public class InfoPanel extends JPanel {
 		super();
 		int labelWidth = width - 30;
 		
-		System.out.println("width:" + width);
-		System.out.println("height:" + height);		
-		
 		setPreferredSize(new Dimension(width, height));
 		setLayout(new FlowLayout());
 		setBackground(new Color(200, 200, 200));
@@ -64,7 +61,7 @@ public class InfoPanel extends JPanel {
 		linesPanel.setOpaque(false);
 		linesPanel.setPreferredSize(new Dimension(labelWidth, 25));
 		linesPanel.setLayout(new BorderLayout());
-		linesPanel.add(new JLabel("DELETE LINES: "), BorderLayout.WEST);
+		linesPanel.add(new JLabel("DELETED LINES: "), BorderLayout.WEST);
 		_lines = new JLabel("0");
 		_lines.setHorizontalAlignment(SwingConstants.RIGHT);
 		linesPanel.add(_lines, BorderLayout.EAST);

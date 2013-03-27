@@ -23,12 +23,10 @@ public class View extends JFrame {
 	 * @param height GamePanel‚Ì‚‚³–ˆ‚ÌƒuƒƒbƒN”
 	 */
 	View(int width, int height){
-		System.out.println("View constructor");
-
-		/* set Frame */
 		_model = new Model(this);
 		_gamePanel = new GamePanel(width, height);
 		_infoPanel = new InfoPanel(_gamePanel.getPanelWidth(), _gamePanel.getPanelHeight());
+
 		getContentPane().setLayout(new GridLayout(1,2));
 		getContentPane().add(_gamePanel);
 		getContentPane().add(_infoPanel);
@@ -47,8 +45,8 @@ public class View extends JFrame {
 	
 	public void paint(Graphics g){
 		super.paint(g);
-		System.out.println("paint");
 		_gamePanel.paint(_gamePanel.getGraphics());
+		_infoPanel.paint(_infoPanel.getGraphics());
 	}
 	
 	public GamePanel getGamePanel(){ return _gamePanel; }

@@ -23,7 +23,6 @@ public class GamePanel extends JPanel{
 
 	public GamePanel(int blockWidth, int blockHeight) {
 		super();
-		System.out.println("GamePanel Constructor");
 
 		_start = new Point(blockWidth/2, 0);
 
@@ -46,7 +45,6 @@ public class GamePanel extends JPanel{
 	}
 
 	public void paintComponent(Graphics g){
-		//		System.out.println("GamePanel.paintComponent");
 		super.paintComponent(g);
 		drawBG(g);
 		drawBlocks(g); // アクティブブロックの描画
@@ -75,14 +73,11 @@ public class GamePanel extends JPanel{
 					+ -1 * p.getX() * (int)Math.sin(b.getRotate()*Math.PI/2) 
 					+ p.getY() * (int)Math.cos(b.getRotate()*Math.PI/2);
 
-			//			System.out.println("x: " +  x + ", y:" + y);
 			drawBlock(g, b.getColor(), dx, dy);
 		}
 	}
 
 	private void drawBlock(Graphics g, int color, int x, int y){
-		//			System.out.println("drawBlock color:" + color + ", x:" + x + ", y:" + y);
-		//		System.out.println("drawBlock color:" + color);
 		g.drawImage(_icon[color], x*_blocksize, y*_blocksize, this);		
 	}
 
