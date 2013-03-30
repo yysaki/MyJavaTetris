@@ -195,8 +195,8 @@ public class Model {
 	}
 	
 	private void setScoreLabels(){
-		_view.getInfoPanel().setScore(Integer.toString(_score));
-		_view.getInfoPanel().setHiscore(Integer.toString(_hiscore));		
-		_view.getInfoPanel().setLines(Integer.toString(_lines));
+		_view.getInfoPanel().setScore(_score);
+		_view.getInfoPanel().setHiscore(_hiscore);		
+		_view.getInfoPanel().setLines(_lines);
 	}
 }
