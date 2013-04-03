@@ -6,6 +6,7 @@ import java.awt.event.*;
 
 import myJavaTetris.yysaki.com.GamePanel;
 import myJavaTetris.yysaki.com.Model;
+import myJavaTetris.yysaki.com.InfoPanel;
 
 /**
  * ゲームウインドウの管理

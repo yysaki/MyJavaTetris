@@ -4,6 +4,7 @@ import java.awt.event.ActionEvent;
 
 import javax.swing.AbstractAction;
 import myJavaTetris.yysaki.com.Model;
+import myJavaTetris.yysaki.com.Point;
 
 
 /**

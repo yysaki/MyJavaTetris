@@ -4,6 +4,7 @@ import java.awt.event.ActionEvent;
 
 import myJavaTetris.yysaki.com.Colleague;
 import myJavaTetris.yysaki.com.Model;
+import myJavaTetris.yysaki.com.Point;
 
 /**
  * キー入力によるイベント操作の管理

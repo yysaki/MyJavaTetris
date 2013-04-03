@@ -20,9 +20,9 @@ public class GameFieldTest extends ProjectTests {
 		for(int i=0;i<w+1;i++){
 			for(int j=0;j<h+1;j++){
 				if(i==w || j==h){
-					assertEquals(f.getStatus(i, j), 7);					
+					assertEquals(f.getStatus(i, j).getId(), 7);					
 				}else{
-					assertEquals(f.getStatus(i, j), 3);
+					assertEquals(f.getStatus(i, j).getId(), 3);
 				}
 			}
 		}
@@ -51,9 +51,9 @@ public class GameFieldTest extends ProjectTests {
 		for(int i=0;i<w+1;i++){
 			for(int j=0;j<h+1;j++){
 				if(i==w || j==h){
-					assertEquals(f.getStatus(i, j), 7);					
+					assertEquals(f.getStatus(i, j).getId(), 7);					
 				}else{
-					assertEquals(f.getStatus(i, j), 3);
+					assertEquals(f.getStatus(i, j).getId(), 3);
 				}
 			}
 		}
@@ -63,9 +63,9 @@ public class GameFieldTest extends ProjectTests {
 		for(int i=0;i<w+1;i++){
 			for(int j=0;j<h+1;j++){
 				if(i==w || j==h){
-					assertEquals(f.getStatus(i, j), 7);					
+					assertEquals(f.getStatus(i, j).getId(), 7);					
 				}else{
-					assertEquals(f.getStatus(i, j), 0);
+					assertEquals(f.getStatus(i, j).getId(), 0);
 				}
 			}
 		}
@@ -93,9 +93,9 @@ public class GameFieldTest extends ProjectTests {
 		for(int i=0;i<w+1;i++){
 			for(int j=0;j<h+1;j++){
 				if(i==w || j==h){
-					assertEquals(f.getStatus(i, j), 7);					
+					assertEquals(f.getStatus(i, j).getId(), 7);					
 				}else{
-					assertEquals(f.getStatus(i, j), 0);
+					assertEquals(f.getStatus(i, j).getId(), 0);
 				}
 			}
 		}

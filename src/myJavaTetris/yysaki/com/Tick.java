@@ -4,6 +4,7 @@ import java.awt.event.ActionEvent;
 import javax.swing.AbstractAction;
 
 import myJavaTetris.yysaki.com.Colleague;
+import myJavaTetris.yysaki.com.Point;
 
 /**
  * タイマーによるイベント操作の管理

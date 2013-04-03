@@ -6,6 +6,7 @@ import javax.swing.JComponent;
 import javax.swing.KeyStroke;
 import javax.swing.Timer;
 
+import myJavaTetris.yysaki.com.BlockColor;
 import myJavaTetris.yysaki.com.View;
 import myJavaTetris.yysaki.com.Tick;
 import myJavaTetris.yysaki.com.GameField;
@@ -117,7 +118,7 @@ public class Model {
 			_timer.stop();
 			_type = END;
 			_view.getInfoPanel().setStatus(_type);
-			gp.fill(gp.getField().getGameOverColor());
+			gp.fill(BlockColor.GAMEOVER);
 			_view.repaint();
 		}
 	}
@@ -131,7 +132,7 @@ public class Model {
 				/* STARTìÆçÏ */
 				_type = PLAYING;
 				_view.getInfoPanel().setStatus(_type);
-				gp.getField().setAll(gp.getField().getEmptyColor());
+				gp.getField().setAll(BlockColor.EMPTY);
 				gp.setBlocks(new GameBlocks(gp.getStartPoint(), 0));
 
 				_view.repaint();
@@ -143,7 +144,7 @@ public class Model {
 				/* replayìÆçÏ */
 				_type = PLAYING;
 				_view.getInfoPanel().setStatus(_type);
-				gp.getField().setAll(gp.getField().getEmptyColor());
+				gp.getField().setAll(BlockColor.EMPTY);
 				gp.setBlocks(new GameBlocks(gp.getStartPoint(), 0));
 				
 				_score = 0;

@@ -1,5 +1,6 @@
 package myJavaTetris.yysaki.com;
 
+import myJavaTetris.yysaki.com.BlockColor;
 import myJavaTetris.yysaki.com.Point;
 
 import java.util.Random;
@@ -10,7 +11,7 @@ import java.util.Random;
  *
  */
 public class GameBlocks {
-	private final int _color; // ブロックの色(imageはView classで管理)
+	private final BlockColor _color; // ブロックの色(imageはView classで管理)
 	private final Point[] _points; // 各ブロック位置
 	private final int _rotatable; // 回転可能な回数
 
@@ -21,7 +22,7 @@ public class GameBlocks {
 	 * Nullオブジェクトとして壁と同じ色のブロックを生成する
 	 * @param color GameFieldの定数
 	 */
-	public GameBlocks(int color){
+	public GameBlocks(BlockColor color){
 		_color = color;
 		_rotatable = 0;
 		_points = new Point[4];
@@ -38,7 +39,7 @@ public class GameBlocks {
 	 * @param rotate
 	 */
 	public GameBlocks(Point dir, int rotate){
-		this(dir, rotate, (new Random().nextInt(7))+1);
+		this(dir, rotate, (new BlockColor(new Random().nextInt(7)+1)));
 	}
 
 	/**
@@ -56,13 +57,14 @@ public class GameBlocks {
 	 * @param rotate
 	 * @param id
 	 */
-	public GameBlocks(Point dir, int rotate, int id){
+	public GameBlocks(Point dir, int rotate, BlockColor color){
+		int id = color.getId();
 		// おかしい値が入ってくる時 棒型とする
 		if(id<1 || 8<id){
 			id = 1;
 		}
 
-		_color = id;
+		_color = new BlockColor(id);
 		_points = new Point[4];
 		_dir = dir;
 
@@ -121,7 +123,7 @@ public class GameBlocks {
 		_rotate = rotate % _rotatable;
 	}
 
-	public int getColor()    { return _color; }
+	public BlockColor getColor()    { return _color; }
 	public Point[] getPoints(){ return _points; }
 	public int getRotatable(){ return _rotatable; }
 

@@ -3,9 +3,12 @@ package myJavaTetris.yysaki.com;
 import java.awt.*;
 import javax.swing.*;
 
+import myJavaTetris.yysaki.com.BlockColor;
 import myJavaTetris.yysaki.com.GameBlocks;
 import myJavaTetris.yysaki.com.GameField;
 import myJavaTetris.yysaki.com.View;
+import myJavaTetris.yysaki.com.Point;
+
 
 /**
  * テトリス画面(JPanel)の管理
@@ -27,7 +30,7 @@ public class GamePanel extends JPanel{
 		_start = new Point(blockWidth/2, 0);
 
 		setField(new GameField(blockWidth, blockHeight));
-		setBlocks(new GameBlocks(getField().getEmptyColor()));
+		setBlocks(new GameBlocks(BlockColor.EMPTY));
 
 		/* panel size */
 		setPreferredSize(new Dimension(getPanelWidth(), getPanelHeight()));
@@ -73,12 +76,12 @@ public class GamePanel extends JPanel{
 					+ -1 * p.getX() * (int)Math.sin(b.getRotate()*Math.PI/2) 
 					+ p.getY() * (int)Math.cos(b.getRotate()*Math.PI/2);
 
-			drawBlock(g, b.getColor(), dx, dy);
+			drawBlock(g, new BlockColor(b.getColor()), dx, dy);
 		}
 	}
 
-	private void drawBlock(Graphics g, int color, int x, int y){
-		g.drawImage(_icon[color], x*_blocksize, y*_blocksize, this);		
+	private void drawBlock(Graphics g, BlockColor c, int x, int y){
+		g.drawImage(_icon[c.getId()], x*_blocksize, y*_blocksize, this);		
 	}
 	
 	public GameField getField(){ return _field; }
@@ -120,7 +123,7 @@ public class GamePanel extends JPanel{
 	 * GamePanelを一色に染める
 	 * @param color GameFieldのカラー定数
 	 */
-	public void fill(int color){
+	public void fill(BlockColor color){
 		getField().setAll(color);
 		setBlocks(new GameBlocks(getStartPoint(), 0, color));
 	}
