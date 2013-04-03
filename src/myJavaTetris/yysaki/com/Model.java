@@ -23,8 +23,10 @@ import myJavaTetris.yysaki.com.Colleague;
  */
 public class Model {
 	private View _view;
-
 	private Timer _timer;
+	
+	private GameBlocks _nextBlocks;
+	
 	/** Colleagueインスタンス衆 */
 	private Tick _tick;
 	private Controller _actionEnter;
@@ -50,6 +52,7 @@ public class Model {
 	public Model(View v){
 		_view = v;
 		_type = READY;
+		_nextBlocks = new GameBlocks();
 
 		/* Tick */
 		_tick = new Tick(this);
@@ -110,8 +113,7 @@ public class Model {
 		setScoreLabels();
 		_view.repaint();
 
-		// 新しいテトリスブロックを出現させる
-		gp.setBlocks(new GameBlocks(gp.getStartPoint(), 0));
+		setNextBlocks();
 
 		// check game over
 		if(gp.isGameOver()){
@@ -120,6 +122,7 @@ public class Model {
 			_view.getInfoPanel().setStatus(_type);
 			gp.fill(BlockColor.GAMEOVER);
 			_view.repaint();
+
 		}
 	}
 
@@ -133,8 +136,9 @@ public class Model {
 				_type = PLAYING;
 				_view.getInfoPanel().setStatus(_type);
 				gp.getField().setAll(BlockColor.EMPTY);
-				gp.setBlocks(new GameBlocks(gp.getStartPoint(), 0));
-
+				_nextBlocks = new GameBlocks(_view.getGamePanel().getStartPoint(), 0);
+				setNextBlocks();
+				
 				_view.repaint();
 				_timer.start();
 				break;
@@ -145,7 +149,8 @@ public class Model {
 				_type = PLAYING;
 				_view.getInfoPanel().setStatus(_type);
 				gp.getField().setAll(BlockColor.EMPTY);
-				gp.setBlocks(new GameBlocks(gp.getStartPoint(), 0));
+				_nextBlocks = new GameBlocks(_view.getGamePanel().getStartPoint(), 0);
+				setNextBlocks();
 				
 				_score = 0;
 				_lines = 0;
@@ -165,7 +170,7 @@ public class Model {
 			if(_view.getGamePanel().isMovable(c.getDir(), c.getRotate())){
 				final GameBlocks b = _view.getGamePanel().getBlocks();
 
-				b.setDir(new Point(b.getDir().getX()+c.getDir().getX(), b.getDir().getY()+c.getDir().getY()));
+				b.setDir(new MyPoint(b.getDir().getX()+c.getDir().getX(), b.getDir().getY()+c.getDir().getY()));
 				b.setRotate((b.getRotate() + c.getRotate()) % b.getRotatable());
 				_view.repaint();
 			}else if(_actionDown.equals(c) || _tick.equals(c)){
@@ -179,10 +184,18 @@ public class Model {
 		_hiscore = Math.max(_hiscore, _score);
 		_lines += arg;
 	}
-
+	/**
+	 * 	 新しいテトリスブロックを出現させる
+	 */
+	private void setNextBlocks(){
+		_view.getGamePanel().setBlocks(_nextBlocks);
+		_nextBlocks = new GameBlocks(_view.getGamePanel().getStartPoint(), 0);
+		_view.getInfoPanel().setNextBlocks(_nextBlocks);
+	}
+	
 	private void setScoreLabels(){
 		_view.getInfoPanel().setScore(_score);
-		_view.getInfoPanel().setHiscore(_hiscore);		
+		_view.getInfoPanel().setHiscore(_hiscore);
 		_view.getInfoPanel().setLines(_lines);
 	}
 }

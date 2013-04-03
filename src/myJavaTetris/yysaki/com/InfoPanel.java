@@ -1,9 +1,11 @@
 package myJavaTetris.yysaki.com;
 
 import java.awt.*;
+
 import javax.swing.*;
 
 import javax.swing.JPanel;
+import myJavaTetris.yysaki.com.InfoNextBlocksPanel;
 
 /**
  * ゲームの操作方法や状況を表示するパネル
@@ -13,6 +15,7 @@ import javax.swing.JPanel;
 @SuppressWarnings("serial")
 public class InfoPanel extends JPanel {
 	private MessagePanel _message;
+	private InfoNextBlocksPanel _nextPanel;
 	private PointsPanel _hiscore;
 	private PointsPanel _score;
 	private PointsPanel _lines;
@@ -42,17 +45,25 @@ public class InfoPanel extends JPanel {
 		setBackground(new Color(200, 200, 200));
 		
 		_message = new MessagePanel(stringWidth);
+		_nextPanel = new InfoNextBlocksPanel();
 		_hiscore = new PointsPanel(stringWidth, "HISCORE");
 		_score = new PointsPanel(stringWidth, "SCORE");
 		_lines = new PointsPanel(stringWidth, "DELETED LINES");
 		_keybinds = new KeybindsPanel(stringWidth);
 		
 		add(_message);
+		add(_nextPanel);
 		add(_hiscore);
 		add(_score);
 		add(_lines);
 		add(_keybinds);
 	}
+	
+	public void paintComponent(Graphics g){
+		super.paintComponent(g);
+		_nextPanel.paintComponent(_nextPanel.getGraphics());
+	}
+
 	
 	private class MessagePanel extends JPanel {
 		JLabel _label;
@@ -112,7 +123,7 @@ public class InfoPanel extends JPanel {
 		}
 
 	}
-	
+	public void setNextBlocks(GameBlocks arg){ _nextPanel.setNextBlocks(arg); }
 	public void setStatus(int type){ _message.setMessage(type); }
 	public void setHiscore(int arg){ _hiscore.setPoints(arg); }
 	public void setScore(int arg){ _score.setPoints(arg); }

@@ -6,13 +6,13 @@ package myJavaTetris.yysaki.com;
  * @author yysaki
  *
  */
-public class Point {
+public class MyPoint {
 	private final int _x, _y;
 
-	public Point(){
+	public MyPoint(){
 		this(0,0);
 	}
-	public Point(int x, int y){
+	public MyPoint(int x, int y){
 		this._x = x; this._y = y;
 	}
 	public int getX(){

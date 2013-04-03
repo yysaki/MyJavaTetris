@@ -52,7 +52,7 @@ public class GameField {
 	public Boolean pileBlocks(GameBlocks b){
 		Boolean ret = true;
 		for(int i=0;i<b.getPoints().length;i++){
-			final Point p = b.getPoints()[i];
+			final MyPoint p = b.getPoints()[i];
 			final int x = b.getDir().getX() + p.getX() * (int)Math.cos((b.getRotate())*Math.PI/2) + p.getY() * (int)Math.sin((b.getRotate())*Math.PI/2);
 			final int y = b.getDir().getY() + -1 * p.getX() * (int)Math.sin((b.getRotate())*Math.PI/2) + p.getY() * (int)Math.cos((b.getRotate())*Math.PI/2);
 			if(!_statuses[x][y].equals(BlockColor.EMPTY)){
@@ -119,7 +119,7 @@ public class GameField {
 	 */
 	public Boolean canSetBlocks(GameBlocks b){
 		for(int i=0;i<b.getPoints().length;i++){
-			final Point p = b.getPoints()[i];
+			final MyPoint p = b.getPoints()[i];
 			final int x = b.getDir().getX() + p.getX() * (int)Math.cos((b.getRotate())*Math.PI/2) + p.getY() * (int)Math.sin((b.getRotate())*Math.PI/2);
 			final int y = b.getDir().getY() + -1 * p.getX() * (int)Math.sin((b.getRotate())*Math.PI/2) + p.getY() * (int)Math.cos((b.getRotate())*Math.PI/2);
 

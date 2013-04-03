@@ -2,6 +2,7 @@ package myJavaTetris.yysaki.com;
 
 /**
  * ブロックの色情報を管理するクラス
+ * _idの配置はBlockIcon::_iconに依存する
  * @author yysaki
  *
  */

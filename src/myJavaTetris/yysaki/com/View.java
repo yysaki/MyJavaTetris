@@ -44,10 +44,10 @@ public class View extends JFrame {
 		setVisible(true);
 	}
 	
-	public void paint(Graphics g){
+	public void paintComponent(Graphics g){
 		super.paint(g);
-		_gamePanel.paint(_gamePanel.getGraphics());
-		_infoPanel.paint(_infoPanel.getGraphics());
+		_gamePanel.paintComponent(_gamePanel.getGraphics());
+		_infoPanel.paintComponent(_infoPanel.getGraphics());
 	}
 	
 	public GamePanel getGamePanel(){ return _gamePanel; }

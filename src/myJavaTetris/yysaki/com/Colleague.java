@@ -4,7 +4,7 @@ import java.awt.event.ActionEvent;
 
 import javax.swing.AbstractAction;
 import myJavaTetris.yysaki.com.Model;
-import myJavaTetris.yysaki.com.Point;
+import myJavaTetris.yysaki.com.MyPoint;
 
 
 /**
@@ -29,7 +29,7 @@ public abstract class Colleague extends AbstractAction {
 	abstract public void actionPerformed(ActionEvent arg0);
 
 	/** アクション時の移動方向 */
-	abstract public Point getDir();
+	abstract public MyPoint getDir();
 	/** アクション時の回転方向(0の時回転しない) */
 	abstract public int getRotate();
 }

@@ -1,7 +1,7 @@
 package myJavaTetris.yysaki.com;
 
 import myJavaTetris.yysaki.com.BlockColor;
-import myJavaTetris.yysaki.com.Point;
+import myJavaTetris.yysaki.com.MyPoint;
 
 import java.util.Random;
 
@@ -12,25 +12,28 @@ import java.util.Random;
  */
 public class GameBlocks {
 	private final BlockColor _color; // ブロックの色(imageはView classで管理)
-	private final Point[] _points; // 各ブロック位置
+	private final MyPoint[] _points; // 各ブロック位置
 	private final int _rotatable; // 回転可能な回数
 
-	private Point _dir;
+	private MyPoint _dir;
 	private int _rotate;
 	
 	/**
 	 * Nullオブジェクトとして壁と同じ色のブロックを生成する
-	 * @param color GameFieldの定数
 	 */
-	public GameBlocks(BlockColor color){
-		_color = color;
-		_rotatable = 0;
-		_points = new Point[4];
-		for(int i = 0; i < 4; i++){
-			_points[i] = new Point();
+	public GameBlocks(){
+		_color = BlockColor.EMPTY;
+		_points = new MyPoint[4];
+		for(int i = 0; i < _points.length; i++){
+			_points[i] = new MyPoint();
 		}
-		_dir = new Point();
+		_rotatable = 0;
+		_dir = new MyPoint();
 		_rotate = 0;
+	}
+	
+	public GameBlocks(BlockColor color){
+		this(new MyPoint(), 0, color);
 	}
 
 	/**
@@ -38,7 +41,7 @@ public class GameBlocks {
 	 * @param dir
 	 * @param rotate
 	 */
-	public GameBlocks(Point dir, int rotate){
+	public GameBlocks(MyPoint dir, int rotate){
 		this(dir, rotate, (new BlockColor(new Random().nextInt(7)+1)));
 	}
 
@@ -57,7 +60,7 @@ public class GameBlocks {
 	 * @param rotate
 	 * @param id
 	 */
-	public GameBlocks(Point dir, int rotate, BlockColor color){
+	public GameBlocks(MyPoint dir, int rotate, BlockColor color){
 		int id = color.getId();
 		// おかしい値が入ってくる時 棒型とする
 		if(id<1 || 8<id){
@@ -65,58 +68,58 @@ public class GameBlocks {
 		}
 
 		_color = new BlockColor(id);
-		_points = new Point[4];
+		_points = new MyPoint[4];
 		_dir = dir;
 
 		switch(id){
 		case 1: // 棒形
 			_rotatable = 2;
-			_points[0] = new Point(0,0);
-			_points[1] = new Point(-1,0);
-			_points[2] = new Point(1,0);
-			_points[3] = new Point(2,0);
+			_points[0] = new MyPoint(0,0);
+			_points[1] = new MyPoint(-1,0);
+			_points[2] = new MyPoint(1,0);
+			_points[3] = new MyPoint(2,0);
 			break;
 		case 2: // 正方形
 			_rotatable = 1;
-			_points[0] = new Point(0,0);
-			_points[1] = new Point(1,0);
-			_points[2] = new Point(0,1);
-			_points[3] = new Point(1,1);
+			_points[0] = new MyPoint(0,0);
+			_points[1] = new MyPoint(1,0);
+			_points[2] = new MyPoint(0,1);
+			_points[3] = new MyPoint(1,1);
 			break;
 		case 3: // S型1
 			_rotatable = 2;
-			_points[0] = new Point(0,0);
-			_points[1] = new Point(-1,0);
-			_points[2] = new Point(0,1);
-			_points[3] = new Point(1,1);
+			_points[0] = new MyPoint(0,0);
+			_points[1] = new MyPoint(-1,0);
+			_points[2] = new MyPoint(0,1);
+			_points[3] = new MyPoint(1,1);
 			break;
 		case 4: // S型2
 			_rotatable = 2;
-			_points[0] = new Point(0,0);
-			_points[1] = new Point(1,0);
-			_points[2] = new Point(0,1);
-			_points[3] = new Point(-1,1);
+			_points[0] = new MyPoint(0,0);
+			_points[1] = new MyPoint(1,0);
+			_points[2] = new MyPoint(0,1);
+			_points[3] = new MyPoint(-1,1);
 			break;
 		case 5: // 鍵形1
 			_rotatable = 4;
-			_points[0] = new Point(0,0);
-			_points[1] = new Point(-1,0);
-			_points[2] = new Point(1,0);
-			_points[3] = new Point(-1,1);
+			_points[0] = new MyPoint(0,0);
+			_points[1] = new MyPoint(-1,0);
+			_points[2] = new MyPoint(1,0);
+			_points[3] = new MyPoint(-1,1);
 			break;
 		case 6: // 鍵型2
 			_rotatable = 4;
-			_points[0] = new Point(0,0);
-			_points[1] = new Point(-1,0);
-			_points[2] = new Point(1,0);
-			_points[3] = new Point(1,1);
+			_points[0] = new MyPoint(0,0);
+			_points[1] = new MyPoint(-1,0);
+			_points[2] = new MyPoint(1,0);
+			_points[3] = new MyPoint(1,1);
 			break;
 		default: // T形
 			_rotatable = 4;
-			_points[0] = new Point(0,0);
-			_points[1] = new Point(-1,0);
-			_points[2] = new Point(1,0);
-			_points[3] = new Point(0,1);
+			_points[0] = new MyPoint(0,0);
+			_points[1] = new MyPoint(-1,0);
+			_points[2] = new MyPoint(1,0);
+			_points[3] = new MyPoint(0,1);
 			break;
 		}
 		
@@ -124,12 +127,14 @@ public class GameBlocks {
 	}
 
 	public BlockColor getColor()    { return _color; }
-	public Point[] getPoints(){ return _points; }
+	public MyPoint[] getPoints(){ return _points; }
 	public int getRotatable(){ return _rotatable; }
 
-	public Point getDir()    { return _dir; }
+	public MyPoint getDir()    { return _dir; }
+	public int getX()        { return _dir.getX(); }
+	public int getY()        { return _dir.getY(); }
 	public int getRotate()   { return _rotate; }
-	public void setDir(Point p)      { _dir = p; }
+	public void setDir(MyPoint p)      { _dir = p; }
 	public void setRotate(int r){
 		_rotate = r % _rotatable;
 	}
