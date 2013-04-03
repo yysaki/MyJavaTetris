@@ -93,6 +93,7 @@ public class Model {
 
 
 	/**
+	 * _type == PLAYINGのみ呼び出される
 	 * 地面に設置した時、新しいテトリスブロックを出現させる
 	 * 出現出来ない場合GameOverと判定
 	 */
@@ -100,46 +101,24 @@ public class Model {
 		if(_type != PLAYING){ return; }
 
 		GamePanel gp = _view.getGamePanel();
-		gp.getField().pileBlocks(gp.getBlocks());
-
-		int num = gp.getField().deleteLines();
-
-		_score += num * num;
-		_hiscore = Math.max(_hiscore, _score);
-		_lines += num;
-		setScoreLabels();
 		
+		// Fieldにブロックを設置する
+		gp.getField().pileBlocks(gp.getBlocks());
+		int num = gp.getField().deleteLines();
+		addPoints(num);
+		setScoreLabels();
 		_view.repaint();
 
-		// setNextBlocks
+		// 新しいテトリスブロックを出現させる
 		gp.setBlocks(new GameBlocks(gp.getStartPoint(), 0));
 
-		// set blocks & check game over
-		if(!gp.getField().canSetBlocks(gp.getBlocks())){
+		// check game over
+		if(gp.isGameOver()){
+			_timer.stop();
 			_type = END;
 			_view.getInfoPanel().setStatus(_type);
-
-			_timer.stop();
-
-			gp.getField().setAll(gp.getField().getGameOverColor());
-
-			gp.setBlocks(new GameBlocks(gp.getStartPoint(),0,1));
+			gp.fill(gp.getField().getGameOverColor());
 			_view.repaint();
-		}
-	}
-
-	/**
-	 * dir方向にブロックが移動可能かどうか調べる
-	 */
-	private Boolean isMovable(Point dir, int rotate){
-		GameBlocks next = new GameBlocks(_view.getGamePanel().getBlocks());
-		next.setDir(new Point(next.getDir().getX() + dir.getX(), next.getDir().getY() + dir.getY()));
-		next.setRotate(next.getRotate() + rotate);
-
-		if(_view.getGamePanel().getField().canSetBlocks(next)){
-			return true;
-		}else{
-			return false;
 		}
 	}
 
@@ -182,7 +161,7 @@ public class Model {
 		}
 
 		if(_type == PLAYING){
-			if(isMovable(c.getDir(), c.getRotate())){
+			if(_view.getGamePanel().isMovable(c.getDir(), c.getRotate())){
 				final GameBlocks b = _view.getGamePanel().getBlocks();
 
 				b.setDir(new Point(b.getDir().getX()+c.getDir().getX(), b.getDir().getY()+c.getDir().getY()));
@@ -193,7 +172,13 @@ public class Model {
 			}
 		}
 	}
-	
+
+	private void addPoints(int arg){
+		_score += arg * arg;
+		_hiscore = Math.max(_hiscore, _score);
+		_lines += arg;
+	}
+
 	private void setScoreLabels(){
 		_view.getInfoPanel().setScore(_score);
 		_view.getInfoPanel().setHiscore(_hiscore);		

@@ -80,7 +80,7 @@ public class GamePanel extends JPanel{
 	private void drawBlock(Graphics g, int color, int x, int y){
 		g.drawImage(_icon[color], x*_blocksize, y*_blocksize, this);		
 	}
-
+	
 	public GameField getField(){ return _field; }
 	public void setField(GameField arg){ _field = arg; }
 
@@ -97,4 +97,32 @@ public class GamePanel extends JPanel{
 	public int getPanelHeight(){
 		return getField().getHeight()*_blocksize;
 	}
+
+	/**
+	 * @return 新しくテトリスブロックをセットできない時true
+	 */
+	public Boolean isGameOver(){
+		return !getField().canSetBlocks(getBlocks());
+	}
+	
+	/**
+	 * dir方向にブロックが移動可能かどうか調べる
+	 */
+	public Boolean isMovable(Point dir, int rotate){
+		GameBlocks candidate = new GameBlocks(getBlocks());
+		candidate.setDir(new Point(candidate.getDir().getX() + dir.getX(), candidate.getDir().getY() + dir.getY()));
+		candidate.setRotate(candidate.getRotate() + rotate);
+
+		return getField().canSetBlocks(candidate);
+	}
+	
+	/**
+	 * GamePanelを一色に染める
+	 * @param color GameFieldのカラー定数
+	 */
+	public void fill(int color){
+		getField().setAll(color);
+		setBlocks(new GameBlocks(getStartPoint(), 0, color));
+	}
+
 }

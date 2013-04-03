@@ -16,9 +16,10 @@ public class GameBlocks {
 
 	private Point _dir;
 	private int _rotate;
-
+	
 	/**
 	 * Nullオブジェクトとして壁と同じ色のブロックを生成する
+	 * @param color GameFieldの定数
 	 */
 	public GameBlocks(int color){
 		_color = color;
